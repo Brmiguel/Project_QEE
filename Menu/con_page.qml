@@ -28,6 +28,8 @@ Item{
     bottomMargin: 20
     //contentHeight: con_page_column.height
 
+    //heii
+
     ColumnLayout {
         id: con_page_column
         spacing: 20
