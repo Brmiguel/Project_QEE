@@ -40,9 +40,6 @@ Item{
 
         Label {
             id : title
-            //anchors.left: parent.left
-            //anchors.right: parent.right
-            //anchors.top: parent.top
             Layout.alignment: Qt.AlignTop
             Layout.preferredWidth: parent.width
             font.pixelSize: 22
@@ -81,7 +78,9 @@ Item{
 
         Button{
         id: findButton
-        Layout.alignment: Qt.AlignBottom
+        //Layout.alignment: Qt.AlignLeft
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
         text:"FIND"
         onClicked: {
             bluetooth.find();
@@ -91,7 +90,9 @@ Item{
         }
         Button{
         id: sendButton
-        Layout.alignment: Qt.AlignBottom
+        //Layout.alignment: Qt.AlignHCenter
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
         text:"SEND"
         onClicked: {
             bluetooth.send(mensage.text);
