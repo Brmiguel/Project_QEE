@@ -19,43 +19,40 @@ ApplicationWindow {
 
     //verifica se esta portrait ou nao, vendo de a altura é maior que a largura
     readonly property bool inPortrait: window.width < window.height
-    property real p_ativa: 400
-    property real p_reativa: 100
-    property real p_aparente: p_ativa+p_reativa
 
-    property var graf_ano_P:[490,450,500,600,455,340,200,230,200,340,450,670]
-    property var graf_ano_Q:[150,160,80,123,50,100,138,150,100,80,67,180]
+    /*Grafico Potencia geral*/
+    property real p_P: 400
+    property real p_Q: 100
+    property real p_S: p_P+p_Q
 
-    /*Grafico ano Ano*/
-    property real graf_ano_Ano:2018
-    /*Grafico ano P*//*
-    property real ano_P_Mes_1:490
-    property real ano_P_Mes_2:450
-    property real ano_P_Mes_3:500
-    property real ano_P_Mes_4:600
-    property real ano_P_Mes_5:455
-    property real ano_P_Mes_6:340
-    property real ano_P_Mes_7:200
-    property real ano_P_Mes_8:230
-    property real ano_P_Mes_9:200
-    property real ano_P_Mes_10:340
-    property real ano_P_Mes_11:450
-    property real ano_P_Mes_12:670*/
-    /*Grafico ano Q*/
-    /*
-    property real ano_Q_Mes_1:150
-    property real ano_Q_Mes_2:160
-    property real ano_Q_Mes_3:80
-    property real ano_Q_Mes_4:123
-    property real ano_Q_Mes_5:50
-    property real ano_Q_Mes_6:100
-    property real ano_Q_Mes_7:138
-    property real ano_Q_Mes_8:150
-    property real ano_Q_Mes_9:100
-    property real ano_Q_Mes_10:80
-    property real ano_Q_Mes_11:67
-    property real ano_Q_Mes_12:180*/
+    /*Grafico ano*/
+    property real graf_year_Year:2018
+    property var graf_year_P:[490,450,500,600,455,340,200,230,200,340,450,670]
+    property var graf_year_Q:[150,160,80,123,50,100,138,150,100,80,67,180]
 
+    /*Grafico mês*/
+    property real graf_month_Month:1
+    property var graf_month_P:[]
+    property var graf_month_Q:[]
+
+    /*Grafico dia*/
+    property real graf_day_Day:1
+    property var graf_day_P:[]
+    property var graf_day_Q:[]
+
+    /*Grafico Falha*/
+    property string graf_fault_last:"Sag"
+    property var graf_fault_V:[]
+    property var graf_fault_Time:[]
+    property real graf_fault_Sag:0
+    property real graf_fault_Swell:0
+
+
+    /*Grafico Tempo Real*/
+    property var graf_rt_V:[]
+    property var graf_rt_I:[]
+    property var graf_rt_P:[]
+    property var graf_rt_Time:[]
 
 
         ToolBar {
