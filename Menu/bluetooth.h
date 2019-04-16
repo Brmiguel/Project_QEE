@@ -22,6 +22,17 @@ class Bluetooth : public QObject
 
     Q_PROPERTY(QString btnName READ btnNameRet NOTIFY btnChanged)
 
+    Q_PROPERTY(bool ledConnec READ led_Connec NOTIFY ledChanged)
+
+    Q_PROPERTY(int graf_rt_P READ realTimeP() NOTIFY pRTChanged)
+
+    Q_PROPERTY(int graf_rt_I READ realTimeI() NOTIFY iRTChanged)
+
+    Q_PROPERTY(int graf_rt_V READ realTimeV() NOTIFY vRTChanged)
+
+    Q_PROPERTY(QString paymentText READ paymentFunc NOTIFY paymentChanged)
+
+
 
 
 
@@ -40,6 +51,17 @@ public:
      QString message_return();
 
      QString btnNameRet();
+
+     bool led_Connec();
+
+     int realTimeP();
+
+     int realTimeI();
+
+     int realTimeV();
+
+     QString paymentFunc();
+
 
     Q_INVOKABLE void find();
 
@@ -66,6 +88,11 @@ signals:
     void messageRecieved();
     void listDeviceChanged();
     void btnChanged();
+    void ledChanged();
+    void pRTChanged();
+    void iRTChanged();
+    void vRTChanged();
+    void paymentChanged();
 
 
 
@@ -83,6 +110,9 @@ private slots:
 private:
 
     int index_devices=0;
+    int indexRTP=25;
+    int indexRTI=25;
+    int indexRTV=25;
 
     StructOfDevices structOfDevices[10] ;
 
@@ -97,6 +127,8 @@ private:
     QString btnName;
 
     QStringList detected;
+
+    bool ledConnec;
 
     /*Grafico Potencia geral*/
     int p_P;
@@ -132,6 +164,9 @@ private:
     int graf_rt_P[25];
     QString graf_rt_Time[25];
 
+    /*Custo da eletrecidade por W*/
+
+    double custoLuz ;
 
 
 };
