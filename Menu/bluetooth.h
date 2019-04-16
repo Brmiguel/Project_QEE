@@ -20,6 +20,8 @@ class Bluetooth : public QObject
 
     Q_PROPERTY(QString message READ message_return NOTIFY messageRecieved)
 
+    Q_PROPERTY(QString btnName READ btnNameRet NOTIFY btnChanged)
+
 
 
      QStringListModel *listDevice_model;
@@ -36,6 +38,7 @@ public:
 
      QString message_return();
 
+     QString btnNameRet();
 
     Q_INVOKABLE void find();
 
@@ -49,6 +52,8 @@ signals:
 
     void messageRecieved();
     void listDeviceChanged();
+    void btnChanged();
+
 
 
 private slots:
@@ -74,6 +79,8 @@ private:
     QBluetoothSocket *socket;
 
     QString message;
+
+    QString btnName;
 
     QStringList detected;
 
