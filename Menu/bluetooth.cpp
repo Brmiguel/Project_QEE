@@ -160,4 +160,84 @@ void Bluetooth::readData()
 }
 
 
+/*FUNÇOES DOS GRAFICOS*/
+int Bluetooth::get_graf_Total(int tipo){
+
+    switch (tipo) {
+        case 0:
+            return p_P;
+        case 1:
+            return p_Q;
+        case 2:
+            return p_P+p_Q;
+    }
+   return -1;
+};
+
+int Bluetooth::get_graf_year(int tipo, int index ...){
+
+    switch (tipo) {
+        case 0:
+            return graf_year_Year;
+        case 1:
+            return graf_year_P[index];
+        case 2:
+            return graf_year_Q[index];
+    }
+   return -1;
+};
+
+int Bluetooth::get_graf_month(int tipo, int index ...){
+    switch (tipo) {
+        case 0:
+            return graf_month_Month;
+        case 1:
+            return graf_month_P[index];
+        case 2:
+            return graf_month_Q[index];
+    }
+    return -1;
+
+};
+
+int Bluetooth::get_graf_day(int tipo, int index ...){
+    switch (tipo) {
+        case 0:
+            return graf_day_Day;
+        case 1:
+            return graf_day_P[index];
+        case 2:
+            return graf_day_Q[index];
+    }
+    return -1;
+
+};
+
+int Bluetooth::get_graf_fault(int tipo, int index ...){
+    switch (tipo) {
+        case 0:
+            return graf_fault_V[index];
+        case 1:
+            return graf_fault_Sag;
+        case 2:
+            return graf_fault_Swell;
+    }
+    return -1;
+
+};
+
+QString Bluetooth::get_graf_fault_S(int tipo, int index ...){
+    switch (tipo) {
+        case 0:
+            return graf_fault_last;
+        case 1:
+         return graf_fault_Time[index];
+    }
+    return "erro";
+};
+
+
+
+
+
 
