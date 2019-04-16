@@ -23,9 +23,12 @@ ApplicationWindow {
     property real p_reativa: 100
     property real p_aparente: p_ativa+p_reativa
 
+    property var graf_ano_P:[490,450,500,600,455,340,200,230,200,340,450,670]
+    property var graf_ano_Q:[150,160,80,123,50,100,138,150,100,80,67,180]
+
     /*Grafico ano Ano*/
-    property real ano_Ano:2018
-    /*Grafico ano P*/
+    property real graf_ano_Ano:2018
+    /*Grafico ano P*//*
     property real ano_P_Mes_1:490
     property real ano_P_Mes_2:450
     property real ano_P_Mes_3:500
@@ -37,8 +40,9 @@ ApplicationWindow {
     property real ano_P_Mes_9:200
     property real ano_P_Mes_10:340
     property real ano_P_Mes_11:450
-    property real ano_P_Mes_12:670
+    property real ano_P_Mes_12:670*/
     /*Grafico ano Q*/
+    /*
     property real ano_Q_Mes_1:150
     property real ano_Q_Mes_2:160
     property real ano_Q_Mes_3:80
@@ -50,7 +54,7 @@ ApplicationWindow {
     property real ano_Q_Mes_9:100
     property real ano_Q_Mes_10:80
     property real ano_Q_Mes_11:67
-    property real ano_Q_Mes_12:180
+    property real ano_Q_Mes_12:180*/
 
 
 

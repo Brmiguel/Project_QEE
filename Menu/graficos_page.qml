@@ -66,7 +66,7 @@ Item{
          ChartView {
 
              id:ano_g
-             title:ano_Ano
+             title:graf_ano_Ano
              width:inPortrait ? window.width : parent.width
              height:inPortrait ? window.width : parent.width
              legend.alignment: Qt.AlignBottom
@@ -74,7 +74,7 @@ Item{
              antialiasing: true
 
              HorizontalBarSeries {
-                 axisY: BarCategoryAxis { labelsFont:(ano_g.height<400)?Qt.font({pointSize: 6}):Qt.font({pointSize: 8}) ;categories: ["1/"+ano_Ano, "2/"+ano_Ano,"3/"+ano_Ano, "4/"+ano_Ano,"5/"+ano_Ano, "6/"+ano_Ano,"7/"+ano_Ano,"8/"+ano_Ano, "9/"+ano_Ano ,"10/"+ano_Ano,"11/"+ano_Ano, "12/"+ano_Ano] }
+                 axisY: BarCategoryAxis { labelsFont:(ano_g.height<400)?Qt.font({pointSize: 6}):Qt.font({pointSize: 8}) ;categories: ["1/"+graf_ano_Ano, "2/"+graf_ano_Ano,"3/"+graf_ano_Ano, "4/"+graf_ano_Ano,"5/"+graf_ano_Ano, "6/"+graf_ano_Ano,"7/"+graf_ano_Ano,"8/"+graf_ano_Ano, "9/"+graf_ano_Ano ,"10/"+graf_ano_Ano,"11/"+graf_ano_Ano, "12/"+graf_ano_Ano] }
                  axisX: ValueAxis {
                                  min: 0
                                  max:700
@@ -83,8 +83,8 @@ Item{
                                  labelFormat: "%.0f"
                                  labelsFont:(ano_g.width<500)?Qt.font({pointSize: 6}):Qt.font({pointSize: 8})
                  }
-                 BarSet { label: "Potencia Ativa";values: [ ano_P_Mes_1, ano_P_Mes_2,  ano_P_Mes_3,  ano_P_Mes_4,  ano_P_Mes_5,  ano_P_Mes_6,,  ano_P_Mes_7,  ano_P_Mes_8,  ano_P_Mes_9,  ano_P_Mes_10,  ano_P_Mes_11,  ano_P_Mes_12]}
-                 BarSet { label: "Potencia Reativa";values: [ano_Q_Mes_1, ano_Q_Mes_2, ano_Q_Mes_3, ano_Q_Mes_4, ano_Q_Mes_5, ano_Q_Mes_6, ano_Q_Mes_7, ano_Q_Mes_8, ano_Q_Mes_9, ano_Q_Mes_10, ano_Q_Mes_11, ano_Q_Mes_12]}
+                 BarSet { label: "Potencia Ativa";values:graf_ano_P}
+                 BarSet { label: "Potencia Reativa";values:graf_ano_Q}
 
              }
          }
