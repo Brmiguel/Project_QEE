@@ -60,6 +60,7 @@ private slots:
 
     void deviceDiscovered(const QBluetoothDeviceInfo &device);
 
+    void connectedChanged();
 
     void finishedSearch();
 

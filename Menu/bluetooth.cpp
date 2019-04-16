@@ -23,6 +23,7 @@ Bluetooth::Bluetooth(QObject *parent)
         connect(agent,SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),this,SLOT(deviceDiscovered(QBluetoothDeviceInfo)));
         connect(agent, SIGNAL(finished()), this, SLOT(finishedSearch()));
         connect(socket, SIGNAL(readyRead()), this, SLOT(readData()));
+        connect(socket,SIGNAL(connected()),this, SLOT(connectedChanged()));
 
         agent->start();
     }
@@ -50,6 +51,11 @@ void Bluetooth::deviceDiscovered(const QBluetoothDeviceInfo &device)
 
 }
 
+void Bluetooth::connectedChanged()
+{
+    emit btnChanged();
+}
+
 QString Bluetooth::message_return()
 {
     return message;
@@ -58,15 +64,19 @@ QString Bluetooth::message_return()
 
 QString Bluetooth::btnNameRet()
 {
-    if(socket->state() == QBluetoothSocket::ConnectingState){  // state connected
+    if(socket->state() == QBluetoothSocket::ConnectingState ){  // state connected
 
-        btnName = "Disconnect";
+        btnName = "Connecting ...";
+    }
+    if(socket->state() == QBluetoothSocket::ConnectedState ){  // state connected
+
+        btnName = "Connected";
     }
 
-    else {
+    if(socket->state() == QBluetoothSocket::UnconnectedState ){
         btnName = "Find";
     }
-    qDebug() << "in btnNameRet()"<< socket->state();
+
     return btnName;
 }
 
@@ -103,6 +113,7 @@ void Bluetooth::find()
 
         // Start a discovery
         agent->start();
+        socket->abort();
      }
 
 
