@@ -187,6 +187,8 @@ int Bluetooth::realTimeP()
 {
 
     indexRTP--;
+    if (indexRTP<0)
+        indexRTP=25;
     return graf_rt_P[indexRTP];
 
 }
@@ -195,6 +197,8 @@ int Bluetooth::realTimeI()
 {
 
     indexRTI--;
+    if (indexRTI<0)
+        indexRTI=25;
     return graf_rt_I[indexRTI];
 
 }
@@ -203,6 +207,8 @@ int Bluetooth::realTimeV()
 {
 
     indexRTV--;
+    if (indexRTV<0)
+        indexRTV=25;
     return graf_rt_V[indexRTV];
 
 }
