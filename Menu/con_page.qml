@@ -73,28 +73,15 @@ Item{
 
         Button{
         id: findButton
-        //Layout.alignment: Qt.AlignLeft
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        text:"FIND"
+        Layout.alignment: Qt.AlignBottom
+        text: bluetooth.btnName
         onClicked: {
             bluetooth.find();
 
         }
 
         }
-        Button{
-        id: sendButton
-        //Layout.alignment: Qt.AlignHCenter
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        text:"SEND"
-        onClicked: {
-            bluetooth.send(mensage.text);
 
-        }
-
-        }
     }
 }
 

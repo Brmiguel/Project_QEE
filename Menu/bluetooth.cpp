@@ -56,6 +56,22 @@ QString Bluetooth::message_return()
 
 }
 
+QString Bluetooth::btnNameRet()
+{
+    if(socket->state() == QBluetoothSocket::ConnectingState){  // state connected
+
+        btnName = "Disconnect";
+    }
+
+    else {
+        btnName = "Find";
+    }
+    qDebug() << "in btnNameRet()"<< socket->state();
+    return btnName;
+}
+
+
+
 void Bluetooth::finishedSearch()
 {
     //qDebug() << "acabei ";
@@ -89,9 +105,12 @@ void Bluetooth::find()
         agent->start();
      }
 
+
     else {
         qDebug() << "O BLUETOOTH TA TOFO FUDIDO" ;
     }
+
+ emit btnChanged();
 
 
 }
@@ -109,6 +128,9 @@ void Bluetooth::conectar(QString name)
     static const QString serviceUuid("00001101-0000-1000-8000-00805F9B34FB");
 
     socket->connectToService(QBluetoothAddress(addr),QBluetoothUuid(serviceUuid),QIODevice::ReadWrite | QIODevice::Unbuffered);
+
+
+    emit btnChanged();
 }
 
 void Bluetooth::send(QString mensage)
