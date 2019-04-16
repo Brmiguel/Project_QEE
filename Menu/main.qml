@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Material 2.12
+import bluetooth 1.0
 
 
 ApplicationWindow {
@@ -9,6 +10,12 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("FUCK QEE")
+
+    Bluetooth{
+
+        id:bluetooth
+
+    }
 
     //verifica se esta portrait ou nao, vendo de a altura é maior que a largura
     readonly property bool inPortrait: window.width < window.height
