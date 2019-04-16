@@ -11,12 +11,6 @@ ListModel {
         pagina_id:"home_page.qml"
     }
     ListElement {
-        name: "Geral"
-        color: "transparent"
-        source: "Imagens/baseline-view_module-24px.svg"
-        pagina_id:"geral_page.qml"
-    }
-    ListElement {
         name: "Graficos"
         color: "transparent"
         source: "Imagens/baseline-bar_chart-24px.svg"
