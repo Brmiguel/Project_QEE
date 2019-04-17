@@ -12,5 +12,7 @@
         <file>graficos_page.qml</file>
         <file>con_page.qml</file>
         <file>config_page.qml</file>
+        <file>Imagens/led_on.png</file>
+        <file>Imagens/led_off.png</file>
     </qresource>
 </RCC>
