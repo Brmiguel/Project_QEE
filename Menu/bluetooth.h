@@ -10,6 +10,11 @@
 #include <QStringListModel>
 #include <QObject>
 #include <QtQml>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
+#include <QDir>
+#include <QFile>
+
 
 
 class Bluetooth : public QObject
@@ -63,6 +68,11 @@ class Bluetooth : public QObject
      }typedef StructOfDevices ;
 
 public:
+
+     bool readFile();
+
+     bool writeFile();
+
     explicit Bluetooth(QObject *parent = nullptr);
 
      QStringListModel *ReadListDevice_model();
@@ -171,9 +181,7 @@ private:
     int indexGDP=24;
     int indexGDQ=24;
 
-    int indexGFV=108;
-
-
+    int indexGFV=108;  
 
     StructOfDevices structOfDevices[10] ;
 
