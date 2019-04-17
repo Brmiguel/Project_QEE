@@ -27,6 +27,39 @@ Bluetooth::Bluetooth(QObject *parent)
 
         agent->start();
     }
+
+    p_P=600;
+    p_Q=300;
+
+    graf_year_Year=2018;
+
+    graf_year_P[0]=100;
+    graf_year_P[1]=300;
+    graf_year_P[2]=600;
+    graf_year_P[3]=400;
+    graf_year_P[4]=500;
+    graf_year_P[5]=230;
+    graf_year_P[6]=345;
+    graf_year_P[7]=474;
+    graf_year_P[8]=346;
+    graf_year_P[9]=577;
+    graf_year_P[10]=544;
+    graf_year_P[11]=345;
+
+    graf_year_Q[0]=234;
+    graf_year_Q[1]=124;
+    graf_year_Q[2]=68;
+    graf_year_Q[3]=33;
+    graf_year_Q[4]=160;
+    graf_year_Q[5]=35;
+    graf_year_Q[6]=108;
+    graf_year_Q[7]=123;
+    graf_year_Q[8]=134;
+    graf_year_Q[9]=167;
+    graf_year_Q[10]=123;
+    graf_year_Q[11]=123;
+
+
     graf_rt_P[0]=0;
     graf_rt_P[1]=1;
     graf_rt_P[2]=2;
@@ -290,83 +323,118 @@ void Bluetooth::readData()
 
 
 /*FUNÇOES DOS GRAFICOS*/
-int Bluetooth::get_graf_Total(int tipo){
-
-    switch (tipo) {
-        case 0:
-            return p_P;
-        case 1:
-            return p_Q;
-        case 2:
-            return p_P+p_Q;
-    }
-   return -1;
-};
-
-int Bluetooth::get_graf_year(int tipo, int index ...){
-
-    switch (tipo) {
-        case 0:
-            return graf_year_Year;
-        case 1:
-            return graf_year_P[index];
-        case 2:
-            return graf_year_Q[index];
-    }
-   return -1;
-};
-
-int Bluetooth::get_graf_month(int tipo, int index ...){
-    switch (tipo) {
-        case 0:
-            return graf_month_Month;
-        case 1:
-            return graf_month_P[index];
-        case 2:
-            return graf_month_Q[index];
-    }
-    return -1;
-
-};
-
-int Bluetooth::get_graf_day(int tipo, int index ...){
-    switch (tipo) {
-        case 0:
-            return graf_day_Day;
-        case 1:
-            return graf_day_P[index];
-        case 2:
-            return graf_day_Q[index];
-    }
-    return -1;
-
-};
-
-int Bluetooth::get_graf_fault(int tipo, int index ...){
-    switch (tipo) {
-        case 0:
-            return graf_fault_V[index];
-        case 1:
-            return graf_fault_Sag;
-        case 2:
-            return graf_fault_Swell;
-    }
-    return -1;
-
-};
-
-QString Bluetooth::get_graf_fault_S(int tipo, int index ...){
-    switch (tipo) {
-        case 0:
-            return graf_fault_last;
-        case 1:
-         return graf_fault_Time[index];
-    }
-    return "erro";
-};
 
 
+int Bluetooth::grafPP()
+{
+    return p_P;
+}
+int Bluetooth::grafPQ()
+{
+    return p_Q;
+}
 
+int Bluetooth::grafYear()
+{
+    return graf_year_Year;
+}
 
+int Bluetooth::grafYearP()
+{
 
+    indexGYP--;
+    if (indexGYP<0)
+        indexGYP=12;
+    return graf_year_P[indexGYP];
+
+}
+
+int Bluetooth::grafYearQ()
+{
+
+    indexGYQ--;
+    if (indexGYQ<0)
+        indexGYQ=12;
+    return graf_year_Q[indexGYQ];
+
+}
+
+int Bluetooth::grafMonth()
+{
+    return graf_month_Month;
+}
+
+int Bluetooth::grafMonthP()
+{
+
+    indexGMP--;
+    if (indexGMP<0)
+        indexGMP=31;
+    return graf_month_P[indexGMP];
+
+}
+
+int Bluetooth::grafMonthQ()
+{
+
+    indexGMQ--;
+    if (indexGMQ<0)
+        indexGMQ=31;
+    return graf_month_Q[indexGMQ];
+
+}
+
+int Bluetooth::grafDay()
+{
+    return graf_day_Day;
+}
+
+int Bluetooth::grafDayP()
+{
+
+    indexGDP--;
+    if (indexGDP<0)
+        indexGDP=24;
+    return graf_day_P[indexGDP];
+
+}
+
+int Bluetooth::grafDayQ()
+{
+
+    indexGDQ--;
+    if (indexGDQ<0)
+        indexGDQ=24;
+    return graf_day_Q[indexGDQ];
+
+}
+
+QString Bluetooth::grafFaultLast()
+{
+    return graf_fault_last;
+}
+QString Bluetooth::grafFaultTime()
+{
+    return graf_fault_Time;
+}
+
+int Bluetooth::grafFaultV()
+{
+
+    indexGFV--;
+    if (indexGFV<0)
+        indexGFV=108;
+    return graf_fault_V[indexGFV];
+
+}
+
+int Bluetooth::grafFaultSag()
+{
+    return graf_fault_Sag;
+}
+
+int Bluetooth::grafFaultSwell()
+{
+    return graf_fault_Swell;
+}
 

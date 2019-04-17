@@ -25,12 +25,31 @@ class Bluetooth : public QObject
     Q_PROPERTY(bool ledConnec READ led_Connec NOTIFY ledChanged)
 
     Q_PROPERTY(int graf_rt_P READ realTimeP() NOTIFY pRTChanged)
-
     Q_PROPERTY(int graf_rt_I READ realTimeI() NOTIFY iRTChanged)
-
     Q_PROPERTY(int graf_rt_V READ realTimeV() NOTIFY vRTChanged)
 
     Q_PROPERTY(QString paymentText READ paymentFunc NOTIFY paymentChanged)
+
+    Q_PROPERTY(int graf_P_P READ grafPP() NOTIFY PPChanged)
+    Q_PROPERTY(int graf_P_Q READ grafPQ() NOTIFY PQChanged)
+
+    Q_PROPERTY(int graf_year READ grafYear() NOTIFY GYChanged)
+    Q_PROPERTY(int graf_year_P READ grafYearP() NOTIFY pGYChanged)
+    Q_PROPERTY(int graf_year_Q READ grafYearQ() NOTIFY qGYChanged)
+
+    Q_PROPERTY(int graf_month READ grafMonth() NOTIFY GMChanged)
+    Q_PROPERTY(int graf_month_P READ grafMonthP() NOTIFY pGMChanged)
+    Q_PROPERTY(int graf_month_Q READ grafMonthQ() NOTIFY qGMChanged)
+
+    Q_PROPERTY(int graf_day READ grafDay() NOTIFY GDChanged)
+    Q_PROPERTY(int graf_day_P READ grafDayP() NOTIFY pGDChanged)
+    Q_PROPERTY(int graf_day_Q READ grafDayQ() NOTIFY qGDChanged)
+
+    Q_PROPERTY(QString graf_fault_last READ grafFaultLast() NOTIFY GFLChanged)
+    Q_PROPERTY(QString graf_fault_time READ grafFaultTime() NOTIFY timeGFChanged)
+    Q_PROPERTY(int graf_fault_V READ grafFaultV() NOTIFY vGFChanged)
+    Q_PROPERTY(int graf_fault_Sag READ grafFaultSag() NOTIFY sagGFChanged)
+    Q_PROPERTY(int graf_fault_Swell READ grafFaultSwell() NOTIFY swellGFChanged)
 
 
 
@@ -62,25 +81,33 @@ public:
 
      QString paymentFunc();
 
+     /*Funçoes Graficos*/
+     int grafPP();
+     int grafPQ();
+
+     int grafYear();
+     int grafYearP();
+     int grafYearQ();
+
+     int grafMonth();
+     int grafMonthP();
+     int grafMonthQ();
+
+     int grafDay();
+     int grafDayP();
+     int grafDayQ();
+
+     QString grafFaultLast();
+     QString grafFaultTime();
+     int grafFaultV();
+     int grafFaultSag();
+     int grafFaultSwell();
 
     Q_INVOKABLE void find();
 
     Q_INVOKABLE void conectar(QString name);
 
     Q_INVOKABLE void send(QString mensage);
-
-    /*Funçoes Graficos*/
-    Q_INVOKABLE int get_graf_Total(int tipo);
-
-    Q_INVOKABLE int get_graf_year(int tipo, int index ...);
-
-    Q_INVOKABLE int get_graf_month(int tipo, int index ...);
-
-    Q_INVOKABLE int get_graf_day(int tipo, int index ...);
-
-    Q_INVOKABLE int get_graf_fault(int tipo, int index ...);
-
-    Q_INVOKABLE QString get_graf_fault_S(int tipo, int index ...);
 
 
 signals:
@@ -93,6 +120,27 @@ signals:
     void iRTChanged();
     void vRTChanged();
     void paymentChanged();
+
+    void PPChanged();
+    void PQChanged();
+
+    void GYChanged();
+    void pGYChanged();
+    void qGYChanged();
+
+    void GMChanged();
+    void pGMChanged();
+    void qGMChanged();
+
+    void GDChanged();
+    void pGDChanged();
+    void qGDChanged();
+
+    void GFLChanged();
+    void timeGFChanged();
+    void vGFChanged();
+    void sagGFChanged();
+    void swellGFChanged();
 
 
 
@@ -113,6 +161,19 @@ private:
     int indexRTP=25;
     int indexRTI=25;
     int indexRTV=25;
+
+    int indexGYP=12;
+    int indexGYQ=12;
+
+    int indexGMP=31;
+    int indexGMQ=31;
+
+    int indexGDP=24;
+    int indexGDQ=24;
+
+    int indexGFV=108;
+
+
 
     StructOfDevices structOfDevices[10] ;
 
@@ -153,7 +214,7 @@ private:
     /*Grafico Falha*///Guarda os 3 ultimos ciclos da falha (de 10º em 10º)
     QString graf_fault_last;
     int graf_fault_V[108];
-    QString graf_fault_Time[108];//ver melhor isto
+    QString graf_fault_Time;//ver melhor isto
     int graf_fault_Sag;//counter dos sags
     int graf_fault_Swell;//counter dos swells
 

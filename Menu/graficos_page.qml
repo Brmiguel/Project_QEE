@@ -2,6 +2,8 @@ import QtQuick 2.9
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Material 2.12
 import QtCharts 2.3
+import bluetooth 1.0
+
 
 
 Item{
@@ -51,22 +53,22 @@ Item{
                     id: potencia_S
                     size: 1
                     holeSize: 0.7
-                    PieSlice { label: "Potencia Aparente"; value: p_S ; color: "#fb8c00" }
+                    PieSlice { label: "Potencia Aparente"; value:(bluetooth.graf_P_P + bluetooth.graf_P_Q); color: "#fb8c00" }
              }
              PieSeries {
                  size: 0.7
                  holeSize: 0.25
                  id: potencia_P_Q
                  horizontalPosition : inPortrait ? 0.5:0.5
-                 PieSlice { label: "Potencia Ativa"; value: p_P ; color: "#ffb300" }
-                 PieSlice { label: "Potencia Reativa"; value: p_Q ; color: "#f4511e"}
+                 PieSlice { label: "Potencia Ativa"; value: bluetooth.graf_P_P ; color: "#ffb300" }
+                 PieSlice { label: "Potencia Reativa"; value: bluetooth.graf_P_Q ; color: "#f4511e"}
              }
          }
 
          ChartView {
 
              id:ano_g
-             title:graf_year_Year
+             title: bluetooth.graf_year
              width:inPortrait ? window.width : parent.width
              height:inPortrait ? window.width : parent.width
              legend.alignment: Qt.AlignBottom
@@ -74,7 +76,7 @@ Item{
              antialiasing: true
 
              HorizontalBarSeries {
-                 axisY: BarCategoryAxis { labelsFont:(ano_g.height<400)?Qt.font({pointSize: 6}):Qt.font({pointSize: 8}) ;categories: ["1/"+graf_year_Year, "2/"+graf_year_Year,"3/"+graf_year_Year, "4/"+graf_year_Year,"5/"+graf_year_Year, "6/"+graf_year_Year,"7/"+graf_year_Year,"8/"+graf_year_Year, "9/"+graf_year_Year ,"10/"+graf_year_Year,"11/"+graf_year_Year, "12/"+graf_year_Year] }
+                 axisY: BarCategoryAxis { labelsFont:(ano_g.height<400)?Qt.font({pointSize: 6}):Qt.font({pointSize: 8}) ;categories: ["1/"+bluetooth.graf_year, "2/"+bluetooth.graf_year,"3/"+bluetooth.graf_year, "4/"+bluetooth.graf_year,"5/"+bluetooth.graf_year, "6/"+bluetooth.graf_year,"7/"+bluetooth.graf_year,"8/"+bluetooth.graf_year, "9/"+bluetooth.graf_year ,"10/"+bluetooth.graf_year,"11/"+bluetooth.graf_year, "12/"+bluetooth.graf_year] }
                  axisX: ValueAxis {
                                  min: 0
                                  max:700
@@ -83,12 +85,11 @@ Item{
                                  labelFormat: "%.0f"
                                  labelsFont:(ano_g.width<500)?Qt.font({pointSize: 6}):Qt.font({pointSize: 8})
                  }
-                 BarSet { label: "Potencia Ativa";values:graf_year_P}
-                 BarSet { label: "Potencia Reativa";values:graf_year_Q}
+                 BarSet { id:graf_year_P;label: "Potencia Ativa" ; values:[bluetooth.graf_year_P,bluetooth.graf_year_P,bluetooth.graf_year_P,bluetooth.graf_year_P,bluetooth.graf_year_P,bluetooth.graf_year_P,bluetooth.graf_year_P,bluetooth.graf_year_P,bluetooth.graf_year_P,bluetooth.graf_year_P,bluetooth.graf_year_P,bluetooth.graf_year_P]}
+                 BarSet { id:graf_year_Q;label: "Potencia Reativa"; values:[bluetooth.graf_year_Q,bluetooth.graf_year_Q,bluetooth.graf_year_Q,bluetooth.graf_year_Q,bluetooth.graf_year_Q,bluetooth.graf_year_Q,bluetooth.graf_year_Q,bluetooth.graf_year_Q,bluetooth.graf_year_Q,bluetooth.graf_year_Q,bluetooth.graf_year_Q,bluetooth.graf_year_Q]}
 
              }
          }
-
 
          Component.onCompleted: {
              // Set the common slice properties dynamically for convenience
@@ -97,7 +98,7 @@ Item{
                  potencia_S.at(i).labelVisible = true;
                  potencia_S.at(i).borderWidth = 3;
              }
-             for (var i = 0; i < potencia_P_Q.count; i++) {
+             for (i = 0; i < potencia_P_Q.count; i++) {
                  potencia_P_Q.at(i).borderWidth = 2;
              }
 
