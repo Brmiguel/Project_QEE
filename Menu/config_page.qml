@@ -27,8 +27,8 @@ Item{
          height:con_page_f.height
 
          id: layout
-         //currentIndex:(bluetooth.password && bluetooth.ledConnec)?1:0;
-         currentIndex: 1
+         currentIndex:(bluetooth.password && bluetooth.ledConnec)?1:0;
+         //currentIndex: 1
          Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
          GridLayout{
              columns:3
