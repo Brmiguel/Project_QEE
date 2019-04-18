@@ -140,6 +140,11 @@ QString Bluetooth::message_return()
 
 }
 
+void Bluetooth::mudar_preco(double custo_Luz){
+
+    custoLuz=custo_Luz;
+}
+
 /*Check Password*/
 void Bluetooth::password_correct(QString password_correct)
 {
@@ -339,8 +344,18 @@ void Bluetooth::send(QString mensage,int tipo,bool enable)
         text =send.Graf_rt(enable).toUtf8();
         break;
 
-    case 4:
+    case 4://dd.MM.yyyy - hh:mm:ss
         date_t date;
+        date.day=mensage.left(2).toInt();
+        date.month=mensage.mid(3,2).toInt();
+        date.year=mensage.mid(6,4).toInt();
+        date.hour=mensage.mid(13,2).toInt();
+        date.minute=mensage.mid(16,2).toInt();
+        date.sec=mensage.right(2).toInt();
+        text =send.Date(date).toUtf8();
+        qDebug()<<mensage;
+        qDebug()<<"-"<<date.year<<","<<date.month<<","<<date.day<<","<<date.hour<<","<<date.minute<<","<<date.sec;
+        qDebug()<<text;
         break;
 
     default:

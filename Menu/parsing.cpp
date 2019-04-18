@@ -23,7 +23,8 @@ QString Send::Light(bool enable){//envia o comando para desligar/ligar a luz
 QString Send::Date(date_t date){//envia o comando da data
     QString ret;
     QTextStream out(&ret);
-    out << "s:T:"<<date.year<<","<<date.month<<","<<date.day<<","<<date.hour<<","<<date.minute<<","","<<date.sec<<":P";
+    out << "s:T:"<<date.year<<","<<date.month<<","<<date.day<<","<<date.hour<<","<<date.minute<<","<<date.sec<<":P";
+
     return ret;
 };
 

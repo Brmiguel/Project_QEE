@@ -125,6 +125,8 @@ public:
 
      void parsingFile(QString line , int index);
 
+    Q_INVOKABLE void mudar_preco(double custoLuz);
+
     Q_INVOKABLE void find();
 
     Q_INVOKABLE void conectar(QString name);

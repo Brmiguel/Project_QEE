@@ -27,8 +27,8 @@ Item{
          height:con_page_f.height
 
          id: layout
-         currentIndex:(bluetooth.password && bluetooth.ledConnec)?1:0;
-         //currentIndex: 0
+         //currentIndex:(bluetooth.password && bluetooth.ledConnec)?1:0;
+         currentIndex: 1
          Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
          GridLayout{
              columns:3
@@ -77,21 +77,6 @@ Item{
                  Label{
                      id : pass_status
                      font.pixelSize: 12
-                     /*text:{
-                         if(!bluetooth.password){
-                            if(bluetooth.password_index>0){
-                              text=qsTr("Palavra passe errada!");
-                            }
-                            if(bluetooth.password_index === 0){
-                              text=qsTr("");
-                            }
-                         }
-                         else if(!bluetooth.ledConnec)
-                              text=qsTr("Medidor não esta conectado!");
-                         else
-                          color="";
-
-                     }*/
                      text:(!bluetooth.password && bluetooth.password_index>0)? qsTr("Palavra passe errada!"):qsTr("")
                      Layout.preferredHeight: con_page_f.height/5
                      Layout.alignment: Qt.AlignCenter
@@ -174,6 +159,7 @@ Item{
                         text:"Mudar"
                         Layout.preferredWidth: setting_column.width/1.5
                         onClicked: {
+                            Bluetooth.mudar_preco(change_price.text);
 
                         }
                      }
@@ -188,13 +174,23 @@ Item{
                          font.pixelSize: 18
                          text: qsTr("Enviar data atual")
                      }
+
+                     Timer {
+                           interval: 500; running: true; repeat: true
+                           onTriggered: time.text = Qt.formatDateTime(new Date(),"dd.MM.yyyy ")+"-"+Qt.formatTime(new Date()," hh:mm:ss");
+                     }
+                     Text {
+                         id: time
+                         Layout.alignment: Qt.AlignCenter
+                         //font.pixelSize: Theme.fontSizeHuge * 2.0
+                     }
                      Button{
                         id:button_Date
                         Layout.alignment: Qt.AlignCenter
                         text:"Enviar"
                         Layout.preferredWidth: setting_column.width/1.5
                         onClicked: {
-
+                             bluetooth.send(time.text,4,false);
                         }
                      }
                  }
