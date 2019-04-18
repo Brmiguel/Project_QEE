@@ -294,6 +294,8 @@ void Bluetooth::password_correct(QString password_correct)
     emit password_recieved();
 }
 
+
+
 bool Bluetooth::Password_r(){
     return password_r;
 }
