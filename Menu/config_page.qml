@@ -63,7 +63,7 @@ Item{
                     Layout.preferredWidth: pass_field.width
                     onClicked: {
                         bluetooth.send(pass_field.text,1,false);
-                        pass_status.text="";
+                        //pass_status.text="";
                         pass_field_back.color="transparent"
 
                     }
