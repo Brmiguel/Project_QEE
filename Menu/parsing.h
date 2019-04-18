@@ -2,6 +2,7 @@
 #define PARSING_H
 #include <QMainWindow>
 #include <QTextStream>
+#include <QDebug>
 
 /*Varios tipos que criei para retornar os valores de maneira mais organizada*/
 struct Date{

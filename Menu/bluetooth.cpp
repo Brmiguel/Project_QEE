@@ -41,82 +41,82 @@ Bluetooth::Bluetooth(QObject *parent)
 
 
     graf_rt_P[0]=0;
-    graf_rt_P[1]=1;
-    graf_rt_P[2]=2;
-    graf_rt_P[3]=3;
-    graf_rt_P[4]=4;
-    graf_rt_P[5]=5;
-    graf_rt_P[6]=4;
-    graf_rt_P[7]=3;
-    graf_rt_P[8]=2;
-    graf_rt_P[9]=1;
+    graf_rt_P[1]=0;
+    graf_rt_P[2]=0;
+    graf_rt_P[3]=0;
+    graf_rt_P[4]=0;
+    graf_rt_P[5]=0;
+    graf_rt_P[6]=0;
+    graf_rt_P[7]=0;
+    graf_rt_P[8]=0;
+    graf_rt_P[9]=0;
     graf_rt_P[10]=0;
-    graf_rt_P[11]=1;
-    graf_rt_P[12]=2;
-    graf_rt_P[13]=3;
-    graf_rt_P[14]=4;
-    graf_rt_P[15]=5;
-    graf_rt_P[16]=6;
-    graf_rt_P[17]=7;
-    graf_rt_P[18]=8;
-    graf_rt_P[19]=9;
-    graf_rt_P[20]=10;
-    graf_rt_P[21]=11;
-    graf_rt_P[22]=12;
-    graf_rt_P[23]=13;
-    graf_rt_P[24]=14;
+    graf_rt_P[11]=0;
+    graf_rt_P[12]=0;
+    graf_rt_P[13]=0;
+    graf_rt_P[14]=0;
+    graf_rt_P[15]=0;
+    graf_rt_P[16]=0;
+    graf_rt_P[17]=0;
+    graf_rt_P[18]=0;
+    graf_rt_P[19]=0;
+    graf_rt_P[20]=0;
+    graf_rt_P[21]=0;
+    graf_rt_P[22]=0;
+    graf_rt_P[23]=0;
+    graf_rt_P[24]=0;
 
     graf_rt_I[0]=0;
-    graf_rt_I[1]=1;
-    graf_rt_I[2]=2;
-    graf_rt_I[3]=3;
-    graf_rt_I[4]=4;
-    graf_rt_I[5]=5;
-    graf_rt_I[6]=4;
-    graf_rt_I[7]=3;
-    graf_rt_I[8]=2;
-    graf_rt_I[9]=1;
+    graf_rt_I[1]=0;
+    graf_rt_I[2]=0;
+    graf_rt_I[3]=0;
+    graf_rt_I[4]=0;
+    graf_rt_I[5]=0;
+    graf_rt_I[6]=0;
+    graf_rt_I[7]=0;
+    graf_rt_I[8]=0;
+    graf_rt_I[9]=0;
     graf_rt_I[10]=0;
-    graf_rt_I[11]=1;
-    graf_rt_I[12]=2;
-    graf_rt_I[13]=3;
-    graf_rt_I[14]=4;
-    graf_rt_I[15]=5;
-    graf_rt_I[16]=6;
-    graf_rt_I[17]=7;
-    graf_rt_I[18]=8;
-    graf_rt_I[19]=9;
-    graf_rt_I[20]=10;
-    graf_rt_I[21]=11;
-    graf_rt_I[22]=12;
-    graf_rt_I[23]=13;
-    graf_rt_I[24]=18;
+    graf_rt_I[11]=0;
+    graf_rt_I[12]=0;
+    graf_rt_I[13]=0;
+    graf_rt_I[14]=0;
+    graf_rt_I[15]=0;
+    graf_rt_I[16]=0;
+    graf_rt_I[17]=0;
+    graf_rt_I[18]=0;
+    graf_rt_I[19]=0;
+    graf_rt_I[20]=0;
+    graf_rt_I[21]=0;
+    graf_rt_I[22]=0;
+    graf_rt_I[23]=0;
+    graf_rt_I[24]=0;
 
     graf_rt_V[0]=0;
-    graf_rt_V[1]=1;
-    graf_rt_V[2]=2;
-    graf_rt_V[3]=3;
-    graf_rt_V[4]=4;
-    graf_rt_V[5]=5;
-    graf_rt_V[6]=4;
-    graf_rt_V[7]=3;
-    graf_rt_V[8]=2;
-    graf_rt_V[9]=1;
+    graf_rt_V[1]=0;
+    graf_rt_V[2]=0;
+    graf_rt_V[3]=0;
+    graf_rt_V[4]=0;
+    graf_rt_V[5]=0;
+    graf_rt_V[6]=0;
+    graf_rt_V[7]=0;
+    graf_rt_V[8]=0;
+    graf_rt_V[9]=0;
     graf_rt_V[10]=0;
-    graf_rt_V[11]=1;
-    graf_rt_V[12]=2;
-    graf_rt_V[13]=3;
-    graf_rt_V[14]=4;
-    graf_rt_V[15]=5;
-    graf_rt_V[16]=6;
-    graf_rt_V[17]=7;
-    graf_rt_V[18]=8;
-    graf_rt_V[19]=9;
-    graf_rt_V[20]=10;
-    graf_rt_V[21]=11;
-    graf_rt_V[22]=12;
-    graf_rt_V[23]=13;
-    graf_rt_V[24]=10;
+    graf_rt_V[11]=0;
+    graf_rt_V[12]=0;
+    graf_rt_V[13]=0;
+    graf_rt_V[14]=0;
+    graf_rt_V[15]=0;
+    graf_rt_V[16]=0;
+    graf_rt_V[17]=0;
+    graf_rt_V[18]=0;
+    graf_rt_V[19]=0;
+    graf_rt_V[20]=0;
+    graf_rt_V[21]=0;
+    graf_rt_V[22]=0;
+    graf_rt_V[23]=0;
+    graf_rt_V[24]=0;
 
 
 
@@ -177,7 +177,8 @@ int Bluetooth::realTimeP()
 
     indexRTP--;
     if (indexRTP<0)
-        indexRTP=25;
+        indexRTP=24;
+    qDebug() << "variavel " << indexRTP << " :  " << graf_rt_P[indexRTP];
     return graf_rt_P[indexRTP];
 
 }
@@ -187,7 +188,7 @@ int Bluetooth::realTimeI()
 
     indexRTI--;
     if (indexRTI<0)
-        indexRTI=25;
+        indexRTI=24;
     return graf_rt_I[indexRTI];
 
 }
@@ -197,14 +198,14 @@ int Bluetooth::realTimeV()
 
     indexRTV--;
     if (indexRTV<0)
-        indexRTV=25;
+        indexRTV=24;
     return graf_rt_V[indexRTV];
 
 }
 
 QString Bluetooth::paymentFunc()
 {
-    return ( "Até ao momento o valor de luz que terá de pagar é de " + QString::number(graf_rt_P[24] * custoLuz) + " €");
+    return ( "Até ao momento o valor de luz que terá de pagar é de " + QString::number(graf_rt_P[0] * custoLuz) + " €");
 }
 
 
@@ -390,17 +391,35 @@ void Bluetooth::readData()
     case 4:
 
         break;
-    case 5:
+    case 5:{
+        Graf_rt_t struct_recieve = recieve.Graf_rt(content);
+        for (int i=1; i <25;++i) {
+            graf_rt_V[25-i] = graf_rt_V[24-i];
+            graf_rt_I[25-i] = graf_rt_I[24-i];
+            graf_rt_P[25-i] = graf_rt_P[24-i];
+
+        }
+        graf_rt_V[0] = struct_recieve.v;
+        graf_rt_I[0] = struct_recieve.i;
+        graf_rt_P[0] = struct_recieve.p;
+        //qDebug() << graf_rt_V[1] << "i" << graf_rt_I[1] << "p" << graf_rt_P[1];
+
+        emit pRTChanged();
+        emit iRTChanged();
+        emit vRTChanged();
+
 
         break;
-    case 6://password
+    }
+    case 6:{//password
         password_index++;
         password_correct(recieve.Password(content));
         break;
     }
+    }
 
 
-    qDebug()<<message;
+    //qDebug()<<message;
     emit messageRecieved();
 }
 
@@ -533,7 +552,7 @@ void Bluetooth::parsingFile(QString line , int index)
 
             for (int i=0; i<  ARRAY_SIZE(graf_year_P) ;++i) {
                 graf_year_P[i] = imgName[i+4].toInt();
-                qDebug() << imgName[i+4];
+
             }
         }
         break;

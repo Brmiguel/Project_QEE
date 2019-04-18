@@ -75,7 +75,7 @@ Item{
                          name: "Potência Gasta "
                          XYPoint { x: 1; y: bluetooth.graf_rt_P }
                          XYPoint { x: 2; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 3; y: bluetooth.graf_rt_P}
+                         XYPoint { x: 3; y: bluetooth.graf_rt_P }
                          XYPoint { x: 4; y: bluetooth.graf_rt_P }
                          XYPoint { x: 5; y: bluetooth.graf_rt_P }
                          XYPoint { x: 6; y: bluetooth.graf_rt_P }

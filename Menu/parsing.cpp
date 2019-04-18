@@ -74,6 +74,19 @@ int Recieve::Get_Type(QString content){
     else {
         return -1;
     }
+}
+
+Graf_rt_t Recieve::Graf_rt(QString content)
+{
+    QStringList imgName = content.split(";");
+    Graf_rt_t struct_recieve;
+    struct_recieve.v=imgName[1].toInt();
+    struct_recieve.i=imgName[2].toInt();
+    struct_recieve.p=imgName[3].toInt();
+    //qDebug() << imgName[1] << "i" << imgName[2] << "p" << imgName[3];
+
+    return struct_recieve;
+
 };
 
 QString Recieve::Password(QString content){
