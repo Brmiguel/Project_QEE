@@ -26,8 +26,8 @@ Item{
          height:con_page_f.height
 
          id: layout
-         //currentIndex: bluetooth.password?1:0
-         currentIndex: 0
+         currentIndex: bluetooth.password?1:0
+         //currentIndex: 0
          Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
          GridLayout{
              columns:3
