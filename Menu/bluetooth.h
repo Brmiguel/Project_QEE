@@ -1,6 +1,7 @@
 #ifndef BLUETOOTH_H
 #define BLUETOOTH_H
 #include "parsing.h"
+#include "file.h"
 
 #include <QMainWindow>
 #include <QBluetoothDeviceDiscoveryAgent>
@@ -68,9 +69,7 @@ class Bluetooth : public QObject
 
 public:
 
-     bool readFile();
 
-     bool writeFile();
 
     explicit Bluetooth(QObject *parent = nullptr);
 
