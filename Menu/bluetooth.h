@@ -1,7 +1,7 @@
 #ifndef BLUETOOTH_H
 #define BLUETOOTH_H
 #include "parsing.h"
-#include "file.h"
+
 
 #include <QMainWindow>
 #include <QBluetoothDeviceDiscoveryAgent>
@@ -15,6 +15,7 @@
 #include <QDir>
 #include <QFile>
 
+#define ARRAY_SIZE(array) (sizeof((array))/sizeof((array[0])))
 
 
 class Bluetooth : public QObject
@@ -91,6 +92,10 @@ public:
      int realTimeI();
 
      int realTimeV();
+
+     bool readFile();
+
+     bool writeFile();
 
      QString paymentFunc();
 

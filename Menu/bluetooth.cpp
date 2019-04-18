@@ -33,11 +33,11 @@ Bluetooth::Bluetooth(QObject *parent)
 
 
 
-
     p_P=600;
     p_Q=300;
 
     graf_year_Year=2018;
+
 
     graf_year_P[0]=100;
     graf_year_P[1]=300;
@@ -143,9 +143,128 @@ Bluetooth::Bluetooth(QObject *parent)
     graf_rt_V[22]=12;
     graf_rt_V[23]=13;
     graf_rt_V[24]=10;
+
+    graf_month_Q[0]=1;
+    graf_month_Q[1]=1;
+    graf_month_Q[2]=2;
+    graf_month_Q[3]=3;
+    graf_month_Q[4]=4;
+    graf_month_Q[5]=5;
+    graf_month_Q[6]=4;
+    graf_month_Q[7]=3;
+    graf_month_Q[8]=2;
+    graf_month_Q[9]=1;
+    graf_month_Q[10]=0;
+    graf_month_Q[11]=1;
+    graf_month_Q[12]=2;
+    graf_month_Q[13]=3;
+    graf_month_Q[14]=4;
+    graf_month_Q[15]=5;
+    graf_month_Q[16]=6;
+    graf_month_Q[17]=7;
+    graf_month_Q[18]=8;
+    graf_month_Q[19]=9;
+    graf_month_Q[20]=10;
+    graf_month_Q[21]=11;
+    graf_month_Q[22]=12;
+    graf_month_Q[23]=13;
+    graf_month_Q[24]=14;
+    graf_month_Q[25]=15;
+    graf_month_Q[26]=16;
+    graf_month_Q[27]=17;
+    graf_month_Q[28]=18;
+    graf_month_Q[29]=19;
+    graf_month_Q[30]=20;
+
+    graf_month_P[0]=20;
+    graf_month_P[1]=1;
+    graf_month_P[2]=2;
+    graf_month_P[3]=3;
+    graf_month_P[4]=4;
+    graf_month_P[5]=5;
+    graf_month_P[6]=4;
+    graf_month_P[7]=3;
+    graf_month_P[8]=2;
+    graf_month_P[9]=1;
+    graf_month_P[10]=0;
+    graf_month_P[11]=1;
+    graf_month_P[12]=2;
+    graf_month_P[13]=3;
+    graf_month_P[14]=4;
+    graf_month_P[15]=5;
+    graf_month_P[16]=6;
+    graf_month_P[17]=7;
+    graf_month_P[18]=8;
+    graf_month_P[19]=9;
+    graf_month_P[20]=10;
+    graf_month_P[21]=11;
+    graf_month_P[22]=12;
+    graf_month_P[23]=13;
+    graf_month_P[24]=14;
+    graf_month_P[25]=15;
+    graf_month_P[26]=16;
+    graf_month_P[27]=17;
+    graf_month_P[28]=18;
+    graf_month_P[29]=19;
+    graf_month_P[30]=20;
+
+    graf_day_P[0]=0;
+    graf_day_P[1]=1;
+    graf_day_P[2]=2;
+    graf_day_P[3]=3;
+    graf_day_P[4]=4;
+    graf_day_P[5]=5;
+    graf_day_P[6]=4;
+    graf_day_P[7]=3;
+    graf_day_P[8]=2;
+    graf_day_P[9]=1;
+    graf_day_P[10]=0;
+    graf_day_P[11]=1;
+    graf_day_P[12]=2;
+    graf_day_P[13]=3;
+    graf_day_P[14]=4;
+    graf_day_P[15]=5;
+    graf_day_P[16]=6;
+    graf_day_P[17]=7;
+    graf_day_P[18]=8;
+    graf_day_P[19]=9;
+    graf_day_P[20]=10;
+    graf_day_P[21]=11;
+    graf_day_P[22]=12;
+    graf_day_P[23]=13;
+
+
+
+    graf_day_Q[0]=0;
+    graf_day_Q[1]=1;
+    graf_day_Q[2]=2;
+    graf_day_Q[3]=3;
+    graf_day_Q[4]=4;
+    graf_day_Q[5]=5;
+    graf_day_Q[6]=4;
+    graf_day_Q[7]=3;
+    graf_day_Q[8]=2;
+    graf_day_Q[9]=1;
+    graf_day_Q[10]=0;
+    graf_day_Q[11]=1;
+    graf_day_Q[12]=2;
+    graf_day_Q[13]=3;
+    graf_day_Q[14]=4;
+    graf_day_Q[15]=5;
+    graf_day_Q[16]=6;
+    graf_day_Q[17]=7;
+    graf_day_Q[18]=8;
+    graf_day_Q[19]=9;
+    graf_day_Q[20]=10;
+    graf_day_Q[21]=11;
+    graf_day_Q[22]=12;
+    graf_day_Q[23]=13;
+
+
     custoLuz = 5;
 
     password_r=false;
+    writeFile();
 }
 
 QStringListModel *Bluetooth::ReadListDevice_model()
@@ -516,5 +635,125 @@ int Bluetooth::grafFaultSag()
 int Bluetooth::grafFaultSwell()
 {
     return graf_fault_Swell;
+}
+
+
+bool Bluetooth::readFile()
+{
+    QFile file("Dados.txt");
+    if(!file.exists())
+    {
+        qDebug() << file.fileName() << " does not exists";
+    }
+
+    if(file.open(QIODevice::ReadOnly | QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream textStream(&file);
+
+        qDebug() << " ----- Reading from file ------" ;
+        textStream.seek(0);
+        while (!textStream.atEnd()) {
+
+            qDebug() << textStream.readLine() ; //textStream.readAll()
+
+        }
+
+        file.close();
+        return true;
+    }
+
+    else {
+        qDebug() << " Could not open the file" ;
+        return false;
+    }
+}
+
+bool Bluetooth::writeFile()
+{
+    QFile file("Dados.txt");
+
+
+    if(!file.exists())
+    {
+        qDebug() << file.fileName() << " does not exists";
+    }
+
+    if(file.open(QIODevice::ReadOnly | QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
+    {
+        QTextStream textStream(&file);
+
+        qDebug() << " ----- Writing to file ------" ;
+        /****************************** YEAR DATA SAVING *****************/
+                        /****************   P  *************/
+
+        textStream << "s:GA;2019;P;";
+
+        for (unsigned long i = 0; i < ARRAY_SIZE(graf_year_P) -1;++i) {
+            textStream << QString::number(graf_year_P[i]) + ",";
+        }
+        textStream << QString::number(graf_year_P[11]) + ":P\n";
+
+                            /****************   Q  *************/
+
+        textStream << "s:GA;2019;Q;";
+
+        for (unsigned long i = 0; i < ARRAY_SIZE(graf_year_Q) -1;++i) {
+            textStream << QString::number(graf_year_Q[i]) + ",";
+        }
+        textStream << QString::number(graf_year_Q[11]) + ":P\n";
+
+        /****************************** MONTH DATA SAVING *****************/
+                             /****************   P  *************/
+        textStream << "s:GM;1;P;";
+
+        for (unsigned long i = 0; i < ARRAY_SIZE(graf_month_P) -1;++i) {
+            textStream << QString::number(graf_month_P[i]) + ",";
+        }
+        textStream << QString::number(graf_month_P[ARRAY_SIZE(graf_month_P)-1]) + ":P\n";
+
+                            /****************   Q  *************/
+
+        textStream << "s:GM;1;Q;";
+
+        for (unsigned long i = 0; i < ARRAY_SIZE(graf_month_Q) -1;++i) {
+            textStream << QString::number(graf_month_Q[i]) + ",";
+        }
+        textStream << QString::number(graf_month_Q[ARRAY_SIZE(graf_month_Q)-1]) + ":P\n";
+
+        /****************************** DAY DATA SAVING *****************/
+                             /****************   P  *************/
+        textStream << "s:GH;1;P;";
+
+        for (unsigned long i = 0; i < ARRAY_SIZE(graf_day_P) -1;++i) {
+            textStream << QString::number(graf_day_P[i]) + ",";
+        }
+        textStream << QString::number(graf_day_P[ARRAY_SIZE(graf_day_P)-1]) + ":P\n";
+
+                            /****************   Q  *************/
+
+        textStream << "s:GH;1;Q;";
+
+        for (unsigned long i = 0; i < ARRAY_SIZE(graf_day_Q) -1;++i) {
+            textStream << QString::number(graf_day_Q[i]) + ",";
+        }
+        textStream << QString::number(graf_day_Q[ARRAY_SIZE(graf_day_Q)-1]) + ":P\n";
+
+
+
+        /****************************** ELECTRICITY COST SAVING *****************/
+
+        textStream << "s:C;" + QString::number(custoLuz) + ":P\n";
+
+
+
+
+        file.close();
+        return true;
+    }
+
+    else {
+        qDebug() << " Could not open the file" ;
+        return false;
+    }
 }
 
