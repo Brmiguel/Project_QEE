@@ -205,7 +205,8 @@ int Bluetooth::realTimeV()
 
 QString Bluetooth::paymentFunc()
 {
-    return ( "Até ao momento o valor de luz que terá de pagar é de " + QString::number(graf_rt_P[0] * custoLuz) + " €");
+    paymentText ="Até ao momento o valor de luz que terá de pagar é de " + QString::number(graf_rt_P[0] * custoLuz) + " €";
+    return paymentText;
 }
 
 
@@ -407,6 +408,7 @@ void Bluetooth::readData()
         emit pRTChanged();
         emit iRTChanged();
         emit vRTChanged();
+        emit paymentChanged();
 
 
         break;

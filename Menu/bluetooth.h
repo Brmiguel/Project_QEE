@@ -209,6 +209,8 @@ private:
 
     QString message;
 
+    QString paymentText;
+
     QString btnName;
 
     QStringList detected;
