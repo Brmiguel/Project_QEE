@@ -3,6 +3,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Controls.Material 2.12
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Styles 1.4
+import bluetooth 1.0
 
 
 Item{
@@ -25,7 +26,7 @@ Item{
          height:con_page_f.height
 
          id: layout
-         currentIndex: 1
+         currentIndex: bluetooth.password?1:0
          Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
          GridLayout{
              columns:3
@@ -44,12 +45,11 @@ Item{
                  }
                  TextField{
                     id:pass_field
-                    Layout.preferredWidth:setting_pass_column.width/1.5
                     echoMode:TextInput.Password
                     placeholderText:"Introduza a Palavra-passe:"
                     background: Rectangle {
                            id:pass_field_back
-                           color:"#F42E2E"
+                           color: bluetooth.password?"transparent":"#F42E2E"
                            border.color: "black"
                        }
                     onFocusChanged:{
@@ -59,8 +59,9 @@ Item{
                  Button{
                     id:button_pass
                     text:"Entrar"
-                    Layout.preferredWidth: setting_pass_column.width/1.5
+                    Layout.preferredWidth: pass_field.width
                     onClicked: {
+                        bluetooth.send(pass_field.text,1,false);
 
                     }
                  }

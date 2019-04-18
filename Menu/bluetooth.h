@@ -1,5 +1,6 @@
 #ifndef BLUETOOTH_H
 #define BLUETOOTH_H
+#include "parsing.h"
 
 #include <QMainWindow>
 #include <QBluetoothDeviceDiscoveryAgent>
@@ -10,8 +11,6 @@
 #include <QStringListModel>
 #include <QObject>
 #include <QtQml>
-#include <QXmlStreamReader>
-#include <QXmlStreamWriter>
 #include <QDir>
 #include <QFile>
 
@@ -56,7 +55,7 @@ class Bluetooth : public QObject
     Q_PROPERTY(int graf_fault_Sag READ grafFaultSag() NOTIFY sagGFChanged)
     Q_PROPERTY(int graf_fault_Swell READ grafFaultSwell() NOTIFY swellGFChanged)
 
-
+     Q_PROPERTY(bool password READ Password_r() NOTIFY password_recieved)
 
 
 
@@ -80,6 +79,11 @@ public:
      QString message_return();
 
      QString btnNameRet();
+
+     /*check password*/
+     void password_correct(QString password_correct);
+     bool Password_r();
+
 
      bool led_Connec();
 
@@ -117,10 +121,12 @@ public:
 
     Q_INVOKABLE void conectar(QString name);
 
-    Q_INVOKABLE void send(QString mensage);
+    Q_INVOKABLE void send(QString mensage,int tipo,bool enable);
 
 
 signals:
+
+    void password_recieved();
 
     void messageRecieved();
     void listDeviceChanged();
@@ -199,6 +205,9 @@ private:
 
     bool ledConnec;
 
+    bool password_r;
+    QString password_w;
+
     /*Grafico Potencia geral*/
     int p_P;
     int p_Q;
@@ -231,7 +240,6 @@ private:
     int graf_rt_V[25];
     int graf_rt_I[25];
     int graf_rt_P[25];
-    QString graf_rt_Time[25];
 
     /*Custo da eletrecidade por W*/
 

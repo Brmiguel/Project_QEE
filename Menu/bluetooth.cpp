@@ -20,7 +20,6 @@ bool Bluetooth::readFile()
 
             qDebug() << textStream.readLine() ; //textStream.readAll()
 
-
         }
 
         file.close();
@@ -202,6 +201,7 @@ Bluetooth::Bluetooth(QObject *parent)
     graf_rt_V[24]=10;
     custoLuz = 5;
 
+    password_r=false;
 }
 
 QStringListModel *Bluetooth::ReadListDevice_model()
@@ -209,6 +209,71 @@ QStringListModel *Bluetooth::ReadListDevice_model()
     return listDevice_model;
 }
 
+
+QString Bluetooth::message_return()
+{
+    return message;
+
+}
+
+/*Check Password*/
+void Bluetooth::password_correct(QString password_correct)
+{
+    if(password_correct == password_w){
+        password_r=true;
+    }
+    else {
+        password_r=false;
+    }
+    qDebug()<<password_correct;
+    qDebug()<<password_r;
+    emit password_recieved();
+}
+
+bool Bluetooth::Password_r(){
+    return password_r;
+}
+
+
+/*HOME PAGE*/
+int Bluetooth::realTimeP()
+{
+
+    indexRTP--;
+    if (indexRTP<0)
+        indexRTP=25;
+    return graf_rt_P[indexRTP];
+
+}
+
+int Bluetooth::realTimeI()
+{
+
+    indexRTI--;
+    if (indexRTI<0)
+        indexRTI=25;
+    return graf_rt_I[indexRTI];
+
+}
+
+int Bluetooth::realTimeV()
+{
+
+    indexRTV--;
+    if (indexRTV<0)
+        indexRTV=25;
+    return graf_rt_V[indexRTV];
+
+}
+
+QString Bluetooth::paymentFunc()
+{
+    return ( "Até ao momento o valor de luz que terá de pagar é de " + QString::number(graf_rt_P[24] * custoLuz) + " €");
+}
+
+
+
+/*Funçoes bluetooth*/
 
 void Bluetooth::deviceDiscovered(const QBluetoothDeviceInfo &device)
 {
@@ -228,12 +293,6 @@ void Bluetooth::deviceDiscovered(const QBluetoothDeviceInfo &device)
 void Bluetooth::connectedChanged()
 {
     emit btnChanged();
-}
-
-QString Bluetooth::message_return()
-{
-    return message;
-
 }
 
 QString Bluetooth::btnNameRet()
@@ -278,45 +337,6 @@ bool Bluetooth::led_Connec()
 
     return ledConnec;
 }
-
-int Bluetooth::realTimeP()
-{
-
-    indexRTP--;
-    if (indexRTP<0)
-        indexRTP=25;
-    return graf_rt_P[indexRTP];
-
-}
-
-int Bluetooth::realTimeI()
-{
-
-    indexRTI--;
-    if (indexRTI<0)
-        indexRTI=25;
-    return graf_rt_I[indexRTI];
-
-}
-
-int Bluetooth::realTimeV()
-{
-
-    indexRTV--;
-    if (indexRTV<0)
-        indexRTV=25;
-    return graf_rt_V[indexRTV];
-
-}
-
-QString Bluetooth::paymentFunc()
-{
-    return ( "Até ao momento o valor de luz que terá de pagar é de " + QString::number(graf_rt_P[24] * custoLuz) + " €");
-}
-
-
-
-
 
 void Bluetooth::find()
 {
@@ -369,17 +389,70 @@ void Bluetooth::conectar(QString name)
     emit btnChanged();
 }
 
-void Bluetooth::send(QString mensage)
+void Bluetooth::send(QString mensage,int tipo,bool enable)
 {
-     QByteArray text = mensage.toUtf8() + '\n';
-     socket->write(text);
+    QByteArray text;
+    Send send;
+    switch (tipo) {
+    case 1:
+        password_w=mensage;
+        text=send.PassWord().toUtf8();
+        qDebug()<<password_w;
+        break;
+
+    case 2:
+        text =send.Light(enable).toUtf8();
+        break;
+
+    case 3:
+        text =send.Graf_rt(enable).toUtf8();
+        break;
+
+    case 4:
+        date_t date;
+        break;
+
+    default:
+        text = mensage.toUtf8();
+    }
+    socket->write(text);
+
 }
 
 void Bluetooth::readData()
 {
     QByteArray recieved =  socket->readAll();
-
     message = QString::fromUtf8(recieved);
+
+    Recieve recieve;
+
+    QString content=recieve.Get_Content(message);
+
+    switch (recieve.Get_Type(content)) {
+    case 0:
+
+        break;
+    case 1:
+
+        break;
+    case 2:
+
+        break;
+    case 3:
+
+        break;
+    case 4:
+
+        break;
+    case 5:
+
+        break;
+    case 6://password
+        password_correct(recieve.Password(content));
+        break;
+    }
+
+
     qDebug()<<message;
     emit messageRecieved();
 }
