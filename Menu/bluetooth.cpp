@@ -32,6 +32,7 @@ Bluetooth::Bluetooth(QObject *parent)
 
 
 
+    password_index=0;
 
     p_P=600;
     p_Q=300;
@@ -297,6 +298,11 @@ bool Bluetooth::Password_r(){
     return password_r;
 }
 
+int Bluetooth::Password_index(){
+    return password_index;
+}
+
+
 
 /*HOME PAGE*/
 int Bluetooth::realTimeP()
@@ -511,6 +517,7 @@ void Bluetooth::readData()
 
         break;
     case 6://password
+        password_index++;
         password_correct(recieve.Password(content));
         break;
     }
