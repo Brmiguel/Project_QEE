@@ -10,14 +10,14 @@ Item{
  id: geral_page
 
  Flickable {
-     ScrollIndicator.vertical: ScrollIndicator { }
-
-     id: con_page_f
-
      anchors.fill: parent
+     flickableDirection: Flickable.VerticalFlick
+     boundsBehavior: Flickable.DragOverBounds
+     clip: true
+     contentHeight: 500
+     id: con_page_f
      anchors.topMargin: overlayHeader.height
      anchors.leftMargin: !inPortrait ? drawer.width : undefined
-
      topMargin: 20
      bottomMargin: 20
 
@@ -26,7 +26,8 @@ Item{
          height:con_page_f.height
 
          id: layout
-         currentIndex: bluetooth.password?1:0
+         //currentIndex: bluetooth.password?1:0
+         currentIndex: 0
          Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
          GridLayout{
              columns:3
@@ -49,7 +50,7 @@ Item{
                     placeholderText:"Introduza a Palavra-passe:"
                     background: Rectangle {
                            id:pass_field_back
-                           color: bluetooth.password?"transparent":"#F42E2E"
+                           color: (!bluetooth.password && bluetooth.password_index>0)? "#F42E2E":"transparent"
                            border.color: "black"
                        }
                     onFocusChanged:{
@@ -62,8 +63,18 @@ Item{
                     Layout.preferredWidth: pass_field.width
                     onClicked: {
                         bluetooth.send(pass_field.text,1,false);
+                        pass_status.text="";
+                        pass_field_back.color="transparent"
 
                     }
+                 }
+                 Label{
+                     id : pass_status
+                     font.pixelSize: 12
+                     text:(!bluetooth.password && bluetooth.password_index>0)? qsTr("Palavra passe errada!"):qsTr("")
+                     Layout.preferredHeight: con_page_f.height/5
+                     Layout.alignment: Qt.AlignCenter
+
                  }
              }
              ColumnLayout{
@@ -192,6 +203,7 @@ Item{
 
          }
      }
+     ScrollIndicator.vertical: ScrollIndicator { }
 
  }
 

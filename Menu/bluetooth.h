@@ -55,7 +55,8 @@ class Bluetooth : public QObject
     Q_PROPERTY(int graf_fault_Sag READ grafFaultSag() NOTIFY sagGFChanged)
     Q_PROPERTY(int graf_fault_Swell READ grafFaultSwell() NOTIFY swellGFChanged)
 
-     Q_PROPERTY(bool password READ Password_r() NOTIFY password_recieved)
+    Q_PROPERTY(bool password READ Password_r() NOTIFY password_recieved)
+    Q_PROPERTY(int password_index READ Password_index() NOTIFY password_recieved )
 
 
 
@@ -83,6 +84,7 @@ public:
      /*check password*/
      void password_correct(QString password_correct);
      bool Password_r();
+     int Password_index();
 
 
      bool led_Connec();
@@ -205,6 +207,7 @@ private:
 
     bool ledConnec;
 
+    int password_index;
     bool password_r;
     QString password_w;
 

@@ -88,6 +88,7 @@ Bluetooth::Bluetooth(QObject *parent)
 
     QFile file("Dados.txt");
 
+    password_index=0;
 
 
     p_P=600;
@@ -233,6 +234,11 @@ void Bluetooth::password_correct(QString password_correct)
 bool Bluetooth::Password_r(){
     return password_r;
 }
+
+int Bluetooth::Password_index(){
+    return password_index;
+}
+
 
 
 /*HOME PAGE*/
@@ -448,6 +454,7 @@ void Bluetooth::readData()
 
         break;
     case 6://password
+        password_index++;
         password_correct(recieve.Password(content));
         break;
     }
