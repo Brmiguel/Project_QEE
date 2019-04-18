@@ -6,6 +6,7 @@ import QtQuick.Controls.Styles 1.4
 import bluetooth 1.0
 
 
+
 Item{
  id: geral_page
 
@@ -26,7 +27,7 @@ Item{
          height:con_page_f.height
 
          id: layout
-         currentIndex: bluetooth.password?1:0
+         currentIndex:(bluetooth.password && bluetooth.ledConnec)?1:0;
          //currentIndex: 0
          Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
          GridLayout{
@@ -50,7 +51,12 @@ Item{
                     placeholderText:"Introduza a Palavra-passe:"
                     background: Rectangle {
                            id:pass_field_back
-                           color: (!bluetooth.password && bluetooth.password_index>0)? "#F42E2E":"transparent"
+                           color:{
+                               if(!bluetooth.password && bluetooth.password_index>0)
+                                color= "#F42E2E";
+                               else
+                                color="transparent";
+                           }
                            border.color: "black"
                        }
                     onFocusChanged:{
@@ -63,7 +69,7 @@ Item{
                     Layout.preferredWidth: pass_field.width
                     onClicked: {
                         bluetooth.send(pass_field.text,1,false);
-                        //pass_status.text="";
+                        pass_status.text=bluetooth.ledConnec?"":"Medidor não esta conectado!";
                         pass_field_back.color="transparent"
 
                     }
@@ -71,6 +77,21 @@ Item{
                  Label{
                      id : pass_status
                      font.pixelSize: 12
+                     /*text:{
+                         if(!bluetooth.password){
+                            if(bluetooth.password_index>0){
+                              text=qsTr("Palavra passe errada!");
+                            }
+                            if(bluetooth.password_index === 0){
+                              text=qsTr("");
+                            }
+                         }
+                         else if(!bluetooth.ledConnec)
+                              text=qsTr("Medidor não esta conectado!");
+                         else
+                          color="";
+
+                     }*/
                      text:(!bluetooth.password && bluetooth.password_index>0)? qsTr("Palavra passe errada!"):qsTr("")
                      Layout.preferredHeight: con_page_f.height/5
                      Layout.alignment: Qt.AlignCenter
