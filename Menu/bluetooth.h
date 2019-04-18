@@ -123,6 +123,8 @@ public:
      int grafFaultSag();
      int grafFaultSwell();
 
+     void parsingFile(QString line , int index);
+
     Q_INVOKABLE void find();
 
     Q_INVOKABLE void conectar(QString name);
