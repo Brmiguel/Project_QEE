@@ -5,7 +5,7 @@ import QtCharts 2.3
 
 Item{
  id: home_page
-
+ property bool graph_p: false
      Flickable {
         id: home_page_f
 
@@ -77,35 +77,42 @@ Item{
                      antialiasing: true
 
 
+                     Timer {
+                           interval: 500; running: true; repeat: true
+                           onTriggered: {
+
+                               for(var i = 0;i < 25;i ++) {
+                                   if (graph_p)
+                                        series.remove(i);
+                                   series.insert(i,i, bluetooth.get_Rt_P(i));
+
+                               }
+                               graph_p =true;
+                           }
+                     }
+
                      LineSeries {
 
                          name: "Potência Gasta "
+                         id : series
+                         axisX: ValueAxis {
+                                         min: 0
+                                         max:25
+                                         tickInterval : 5
+                                         tickType:ValueAxis.TicksDynamic
+                                         labelFormat: "%.0f"
+                         }
 
-                         XYPoint { x: 1; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 2; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 3; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 4; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 5; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 6; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 7; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 8; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 9; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 10; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 11; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 12; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 13; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 14; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 15; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 16; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 17; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 18; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 19; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 20; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 21; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 22; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 23; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 24; y: bluetooth.graf_rt_P }
-                         XYPoint { x: 25; y: bluetooth.graf_rt_P }
+                         axisY: ValueAxis {
+                                         min: 0
+                                         max:50
+                                         tickInterval : 10
+                                         tickType:ValueAxis.TicksDynamic
+                                         labelFormat: "%.0f"
+                         }
+
+
+
                      }
                  }
 

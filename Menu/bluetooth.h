@@ -132,6 +132,8 @@ public:
 
     Q_INVOKABLE void send(QString mensage,int tipo,bool enable);
 
+    Q_INVOKABLE double get_Rt_P(int index);
+
 
 signals:
 

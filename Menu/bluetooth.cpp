@@ -367,6 +367,12 @@ void Bluetooth::send(QString mensage,int tipo,bool enable)
 
 }
 
+double Bluetooth::get_Rt_P(int index)
+{
+    qDebug() << index<< " : " <<  graf_rt_P[index];
+    return graf_rt_P[index];
+}
+
 void Bluetooth::readData()
 {
     QByteArray recieved =  socket->readAll();
@@ -394,7 +400,7 @@ void Bluetooth::readData()
         break;
     case 5:{
         Graf_rt_t struct_recieve = recieve.Graf_rt(content);
-        for (int i=1; i <25;++i) {
+        for (int i=0; i < 24;++i) {
             graf_rt_V[i] = graf_rt_V[i+1];
             graf_rt_I[i] = graf_rt_I[i+1];
             graf_rt_P[i] = graf_rt_P[i+1];
@@ -403,13 +409,7 @@ void Bluetooth::readData()
         graf_rt_V[24] = struct_recieve.v;
         graf_rt_I[24] = struct_recieve.i;
         graf_rt_P[24] = struct_recieve.p;
-        //qDebug() << graf_rt_V[1] << "i" << graf_rt_I[1] << "p" << graf_rt_P[1];
-
-        emit pRTChanged();
-        emit iRTChanged();
-        emit vRTChanged();
-        emit paymentChanged();
-
+        qDebug() << graf_rt_V[24] << "i" << graf_rt_I[24] << "p" << graf_rt_P[24];
 
         break;
     }
