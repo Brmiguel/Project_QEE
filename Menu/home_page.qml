@@ -61,6 +61,11 @@ Item{
                  anchors.left: parent.left
                  anchors.right: parent.right
 
+                 Timer {
+                       interval: 500; running: true; repeat: true
+                       onTriggered: potenciaRealTime.rotation
+                 }
+
                  ChartView {
 
                      id: potenciaRealTime
@@ -71,8 +76,11 @@ Item{
                      theme: ChartView.ChartThemeLight
                      antialiasing: true
 
+
                      LineSeries {
+
                          name: "Potência Gasta "
+
                          XYPoint { x: 1; y: bluetooth.graf_rt_P }
                          XYPoint { x: 2; y: bluetooth.graf_rt_P }
                          XYPoint { x: 3; y: bluetooth.graf_rt_P }

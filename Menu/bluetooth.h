@@ -72,7 +72,6 @@ class Bluetooth : public QObject
 public:
 
 
-
     explicit Bluetooth(QObject *parent = nullptr);
 
      QStringListModel *ReadListDevice_model();
@@ -182,6 +181,7 @@ private slots:
 
 
 private:
+
 
     int index_devices=0;
     int indexRTP=25;
