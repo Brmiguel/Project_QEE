@@ -83,7 +83,6 @@ Graf_rt_t Recieve::Graf_rt(QString content)
     struct_recieve.v=imgName[1].toInt();
     struct_recieve.i=imgName[2].toInt();
     struct_recieve.p=imgName[3].toInt();
-    //qDebug() << imgName[1] << "i" << imgName[2] << "p" << imgName[3];
 
     return struct_recieve;
 

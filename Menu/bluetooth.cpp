@@ -178,7 +178,6 @@ int Bluetooth::realTimeP()
     indexRTP--;
     if (indexRTP<0)
         indexRTP=24;
-    qDebug() << "variavel " << indexRTP << " :  " << graf_rt_P[indexRTP];
     return graf_rt_P[indexRTP];
 
 }
@@ -369,8 +368,19 @@ void Bluetooth::send(QString mensage,int tipo,bool enable)
 
 double Bluetooth::get_Rt_P(int index)
 {
-    qDebug() << index<< " : " <<  graf_rt_P[index];
+    //qDebug() << index<< " : " <<  graf_rt_P[index];
     return graf_rt_P[index];
+}
+
+double Bluetooth::get_Rt_V(int index)
+{
+   // qDebug() << index<< " : " <<  graf_rt_P[index];
+    return graf_rt_V[index];
+}
+
+double Bluetooth::get_Rt_I(int index)
+{
+    return graf_rt_I[index];
 }
 
 void Bluetooth::readData()
@@ -409,7 +419,6 @@ void Bluetooth::readData()
         graf_rt_V[24] = struct_recieve.v;
         graf_rt_I[24] = struct_recieve.i;
         graf_rt_P[24] = struct_recieve.p;
-        qDebug() << graf_rt_V[24] << "i" << graf_rt_I[24] << "p" << graf_rt_P[24];
 
         break;
     }
@@ -421,7 +430,6 @@ void Bluetooth::readData()
     }
 
 
-    //qDebug()<<message;
     emit messageRecieved();
 }
 
@@ -614,7 +622,7 @@ void Bluetooth::parsingFile(QString line , int index)
     }
 
     default:{
-        qDebug() << "deu merda";
+        qDebug() << "Erro";
         break;
     }
 

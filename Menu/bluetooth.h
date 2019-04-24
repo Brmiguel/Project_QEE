@@ -134,6 +134,10 @@ public:
 
     Q_INVOKABLE double get_Rt_P(int index);
 
+    Q_INVOKABLE double get_Rt_V(int index);
+
+    Q_INVOKABLE double get_Rt_I(int index);
+
 
 signals:
 

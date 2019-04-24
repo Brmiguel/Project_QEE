@@ -6,6 +6,9 @@ import QtCharts 2.3
 Item{
  id: home_page
  property bool graph_p: false
+ property bool graph_V: false
+ property bool graph_I: false
+
      Flickable {
         id: home_page_f
 
@@ -83,8 +86,8 @@ Item{
 
                                for(var i = 0;i < 25;i ++) {
                                    if (graph_p)
-                                        series.remove(i);
-                                   series.insert(i,i, bluetooth.get_Rt_P(i));
+                                        seriesPotencia.remove(i);
+                                   seriesPotencia.insert(i,i, bluetooth.get_Rt_P(i));
 
                                }
                                graph_p =true;
@@ -94,7 +97,7 @@ Item{
                      LineSeries {
 
                          name: "Potência Gasta "
-                         id : series
+                         id : seriesPotencia
                          axisX: ValueAxis {
                                          min: 0
                                          max:25
@@ -126,33 +129,42 @@ Item{
                      theme: ChartView.ChartThemeLight
                      antialiasing: true
 
+                     Timer {
+                           interval: 500; running: true; repeat: true
+                           onTriggered: {
+
+                               for(var i = 0;i < 25;i ++) {
+                                   if (graph_I)
+                                        seriesCorrente.remove(i);
+                                   seriesCorrente.insert(i,i, bluetooth.get_Rt_I(i));
+
+                               }
+                               graph_I =true;
+                           }
+                     }
+
                      LineSeries {
-                         name: "Corrente"
-                        XYPoint { x: 1; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 2; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 3; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 4; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 5; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 6; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 7; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 8; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 9; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 10; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 11; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 12; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 13; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 14; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 15; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 16; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 17; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 18; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 19; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 20; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 21; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 22; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 23; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 24; y: bluetooth.graf_rt_I }
-                        XYPoint { x: 25; y: bluetooth.graf_rt_I }
+
+                         name: "Corrente "
+                         id : seriesCorrente
+                         axisX: ValueAxis {
+                                         min: 0
+                                         max:25
+                                         tickInterval : 5
+                                         tickType:ValueAxis.TicksDynamic
+                                         labelFormat: "%.0f"
+                         }
+
+                         axisY: ValueAxis {
+                                         min: 0
+                                         max:50
+                                         tickInterval : 10
+                                         tickType:ValueAxis.TicksDynamic
+                                         labelFormat: "%.0f"
+                         }
+
+
+
                      }
                  }
 
@@ -167,33 +179,42 @@ Item{
                      theme: ChartView.ChartThemeLight
                      antialiasing: true
 
+                     Timer {
+                           interval: 500; running: true; repeat: true
+                           onTriggered: {
+
+                               for(var i = 0;i < 25;i ++) {
+                                   if (graph_V)
+                                        seriesVoltage.remove(i);
+                                   seriesVoltage.insert(i,i, bluetooth.get_Rt_V(i));
+
+                               }
+                               graph_V =true;
+                           }
+                     }
+
                      LineSeries {
-                         name: "Tensão"
-                         XYPoint { x: 1; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 2; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 3; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 4; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 5; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 6; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 7; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 8; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 9; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 10; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 11; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 12; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 13; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 14; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 15; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 16; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 17; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 18; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 19; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 20; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 21; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 22; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 23; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 24; y: bluetooth.graf_rt_V }
-                         XYPoint { x: 25; y: bluetooth.graf_rt_V }
+
+                         name: "Tensão "
+                         id : seriesVoltage
+                         axisX: ValueAxis {
+                                         min: 0
+                                         max:25
+                                         tickInterval : 5
+                                         tickType:ValueAxis.TicksDynamic
+                                         labelFormat: "%.0f"
+                         }
+
+                         axisY: ValueAxis {
+                                         min: 0
+                                         max:50
+                                         tickInterval : 10
+                                         tickType:ValueAxis.TicksDynamic
+                                         labelFormat: "%.0f"
+                         }
+
+
+
                      }
                  }
 
