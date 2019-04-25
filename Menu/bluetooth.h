@@ -40,20 +40,24 @@ class Bluetooth : public QObject
     Q_PROPERTY(int graf_P_Q READ grafPQ() NOTIFY PQChanged)
 
     Q_PROPERTY(int graf_year READ grafYear() NOTIFY GYChanged)
-    Q_PROPERTY(int graf_year_P READ grafYearP() NOTIFY pGYChanged)
-    Q_PROPERTY(int graf_year_Q READ grafYearQ() NOTIFY qGYChanged)
+    Q_PROPERTY(int graf_year_Scale READ grafYearS() NOTIFY sGYChanged)
+    Q_PROPERTY(QVariantList graf_year_P READ grafYearP() NOTIFY pGYChanged)
+    Q_PROPERTY(QVariantList graf_year_Q READ grafYearQ() NOTIFY qGYChanged)
 
     Q_PROPERTY(int graf_month READ grafMonth() NOTIFY GMChanged)
-    Q_PROPERTY(int graf_month_P READ grafMonthP() NOTIFY pGMChanged)
-    Q_PROPERTY(int graf_month_Q READ grafMonthQ() NOTIFY qGMChanged)
+    Q_PROPERTY(int graf_month_Scale READ grafMonthS() NOTIFY sGMChanged)
+    Q_PROPERTY(QVariantList graf_month_D READ grafMonthD() NOTIFY dGMChanged)
+    Q_PROPERTY(QVariantList graf_month_P READ grafMonthP() NOTIFY pGMChanged)
+    Q_PROPERTY(QVariantList graf_month_Q READ grafMonthQ() NOTIFY qGMChanged)
 
     Q_PROPERTY(int graf_day READ grafDay() NOTIFY GDChanged)
-    Q_PROPERTY(int graf_day_P READ grafDayP() NOTIFY pGDChanged)
-    Q_PROPERTY(int graf_day_Q READ grafDayQ() NOTIFY qGDChanged)
+    Q_PROPERTY(int graf_day_Scale READ grafDayS() NOTIFY sGDChanged)
+    Q_PROPERTY(QVariantList graf_day_P READ grafDayP() NOTIFY pGDChanged)
+    Q_PROPERTY(QVariantList graf_day_Q READ grafDayQ() NOTIFY qGDChanged)
 
     Q_PROPERTY(QString graf_fault_last READ grafFaultLast() NOTIFY GFLChanged)
     Q_PROPERTY(QString graf_fault_time READ grafFaultTime() NOTIFY timeGFChanged)
-    Q_PROPERTY(int graf_fault_V READ grafFaultV() NOTIFY vGFChanged)
+    Q_PROPERTY(QVariantList graf_fault_V READ grafFaultV() NOTIFY vGFChanged)
     Q_PROPERTY(int graf_fault_Sag READ grafFaultSag() NOTIFY sagGFChanged)
     Q_PROPERTY(int graf_fault_Swell READ grafFaultSwell() NOTIFY swellGFChanged)
 
@@ -105,20 +109,24 @@ public:
      int grafPQ();
 
      int grafYear();
-     int grafYearP();
-     int grafYearQ();
+     int grafYearS();
+     QVariantList grafYearP();
+     QVariantList grafYearQ();
 
      int grafMonth();
-     int grafMonthP();
-     int grafMonthQ();
+     int grafMonthS();
+     QVariantList grafMonthD();
+     QVariantList grafMonthP();
+     QVariantList grafMonthQ();
 
      int grafDay();
-     int grafDayP();
-     int grafDayQ();
+     int grafDayS();
+     QVariantList grafDayP();
+     QVariantList grafDayQ();
 
      QString grafFaultLast();
      QString grafFaultTime();
-     int grafFaultV();
+     QVariantList grafFaultV();
      int grafFaultSag();
      int grafFaultSwell();
 
@@ -156,14 +164,18 @@ signals:
     void PQChanged();
 
     void GYChanged();
+    void sGYChanged();
     void pGYChanged();
     void qGYChanged();
 
     void GMChanged();
+    void sGMChanged();
+    void dGMChanged();
     void pGMChanged();
     void qGMChanged();
 
     void GDChanged();
+    void sGDChanged();
     void pGDChanged();
     void qGDChanged();
 
@@ -193,17 +205,6 @@ private:
     int indexRTP=25;
     int indexRTI=25;
     int indexRTV=25;
-
-    int indexGYP=12;
-    int indexGYQ=12;
-
-    int indexGMP=31;
-    int indexGMQ=31;
-
-    int indexGDP=24;
-    int indexGDQ=24;
-
-    int indexGFV=108;  
 
     StructOfDevices structOfDevices[10] ;
 

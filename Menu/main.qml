@@ -140,8 +140,8 @@ ApplicationWindow {
         StackView{
             id:stack
             anchors.fill: parent
-            //initialItem :Qt.resolvedUrl("home_page.qml")
-            initialItem :Qt.resolvedUrl("graficos_page.qml")
+            initialItem :Qt.resolvedUrl("home_page.qml")
+            //initialItem :Qt.resolvedUrl("graficos_page.qml")
 
         }
 }

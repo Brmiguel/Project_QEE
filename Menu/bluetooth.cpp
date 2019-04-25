@@ -37,8 +37,6 @@ Bluetooth::Bluetooth(QObject *parent)
     p_P=600;
     p_Q=300;
 
-    graf_year_Year=2018;
-
 
     graf_rt_P[0]=0;
     graf_rt_P[1]=0;
@@ -451,24 +449,42 @@ int Bluetooth::grafYear()
     return graf_year_Year;
 }
 
-int Bluetooth::grafYearP()
+int Bluetooth::grafYearS()
 {
+    int max=0;
+    int ret=0;
+    for (int x=0;x<12;x++) {
+        if(max<graf_year_P[x]){
+            max=graf_year_P[x];
+        }
+        if(max<graf_year_Q[x]){
+            max=graf_year_Q[x];
+        }
+    }
+    ret=max+(100-(max%100));
 
-    indexGYP--;
-    if (indexGYP<0)
-        indexGYP=12;
-    return graf_year_P[indexGYP];
-
+    qDebug()<<"-year "<<ret<<" "<<max;
+    return ret;
 }
 
-int Bluetooth::grafYearQ()
+QVariantList Bluetooth::grafYearP()
 {
+    QVariantList ret;
+    for (int x=0;x<12;x++) {
+        ret.append(graf_year_P[x]);
+    }
 
-    indexGYQ--;
-    if (indexGYQ<0)
-        indexGYQ=12;
-    return graf_year_Q[indexGYQ];
+    return ret;
+}
 
+QVariantList Bluetooth::grafYearQ()
+{
+    QVariantList ret;
+    for (int x=0;x<12;x++) {
+        ret.append(graf_year_Q[x]);
+    }
+
+    return ret;
 }
 
 int Bluetooth::grafMonth()
@@ -476,24 +492,86 @@ int Bluetooth::grafMonth()
     return graf_month_Month;
 }
 
-int Bluetooth::grafMonthP()
+int Bluetooth::grafMonthS()
 {
-
-    indexGMP--;
-    if (indexGMP<0)
-        indexGMP=31;
-    return graf_month_P[indexGMP];
-
+    int max=0;
+    for (int x=0;x<31;x++) {
+        if(max<graf_month_P[x]){
+            max=graf_month_P[x];
+        }
+        if(max<graf_month_Q[x]){
+            max=graf_month_Q[x];
+        }
+    }
+    int ret= max+(10-(max%10));
+    qDebug()<<"-month "<<ret<<" "<<max;
+    return ret;
 }
 
-int Bluetooth::grafMonthQ()
+QVariantList Bluetooth::grafMonthD()
 {
+    QVariantList ret;
+    int numd;
 
-    indexGMQ--;
-    if (indexGMQ<0)
-        indexGMQ=31;
-    return graf_month_Q[indexGMQ];
+    if(graf_month_Month==1 || graf_month_Month==3 || graf_month_Month==5 || graf_month_Month==7 || graf_month_Month==8 || graf_month_Month==10 || graf_month_Month==12 ){
+        numd=31;
+    }
+    else if(graf_month_Month==2){
+        numd=29;
+    }
+    else {
+        numd=30;
+    }
 
+    for (int x=0;x<numd;x++) {
+        ret.append(x+1);
+    }
+
+    return ret;
+}
+
+QVariantList Bluetooth::grafMonthP()
+{
+    QVariantList ret;
+    int numd;
+
+    if(graf_month_Month==1 || graf_month_Month==3 || graf_month_Month==5 || graf_month_Month==7 || graf_month_Month==8 || graf_month_Month==10 || graf_month_Month==12 ){
+        numd=31;
+    }
+    else if(graf_month_Month==2){
+        numd=29;
+    }
+    else {
+        numd=30;
+    }
+
+    for (int x=0;x<numd;x++) {
+        ret.append(graf_month_P[x]);
+    }
+
+    return ret;
+}
+
+QVariantList Bluetooth::grafMonthQ()
+{
+    QVariantList ret;
+    int numd;
+
+    if(graf_month_Month==1 || graf_month_Month==3 || graf_month_Month==5 || graf_month_Month==7 || graf_month_Month==8 || graf_month_Month==10 || graf_month_Month==12 ){
+        numd=31;
+    }
+    else if(graf_month_Month==2){
+        numd=29;
+    }
+    else {
+        numd=30;
+    }
+
+    for (int x=0;x<numd;x++) {
+        ret.append(graf_month_Q[x]);
+    }
+
+    return ret;
 }
 
 int Bluetooth::grafDay()
@@ -501,23 +579,40 @@ int Bluetooth::grafDay()
     return graf_day_Day;
 }
 
-int Bluetooth::grafDayP()
+int Bluetooth::grafDayS()
 {
-
-    indexGDP--;
-    if (indexGDP<0)
-        indexGDP=24;
-    return graf_day_P[indexGDP];
-
+    int max=0;
+    for (int x=0;x<24;x++) {
+        if(max<graf_day_P[x]){
+            max=graf_day_P[x];
+        }
+        if(max<graf_day_Q[x]){
+            max=graf_day_Q[x];
+        }
+    }
+    int ret= max+(10-(max%10));
+    qDebug()<<"-day "<<ret<<" "<<max;
+    return ret;
 }
 
-int Bluetooth::grafDayQ()
+QVariantList Bluetooth::grafDayP()
 {
+    QVariantList ret;
+    for (int x=0;x<24;x++) {
+        ret.append(graf_day_P[x]);
+    }
 
-    indexGDQ--;
-    if (indexGDQ<0)
-        indexGDQ=24;
-    return graf_day_Q[indexGDQ];
+    return ret;
+}
+
+QVariantList Bluetooth::grafDayQ()
+{
+    QVariantList ret;
+    for (int x=0;x<24;x++) {
+        ret.append(graf_day_Q[x]);
+    }
+
+    return ret;
 
 }
 
@@ -530,14 +625,14 @@ QString Bluetooth::grafFaultTime()
     return graf_fault_Time;
 }
 
-int Bluetooth::grafFaultV()
+QVariantList Bluetooth::grafFaultV()
 {
+    QVariantList ret;
+    for (int x=0;x<108;x++) {
+        ret.append(graf_fault_V[x]);
+    }
 
-    indexGFV--;
-    if (indexGFV<0)
-        indexGFV=108;
-    return graf_fault_V[indexGFV];
-
+    return ret;
 }
 
 int Bluetooth::grafFaultSag()
@@ -559,6 +654,7 @@ void Bluetooth::parsingFile(QString line , int index)
     case 0:{
         if (imgName[0] == "s" && imgName[1] == "GA" && imgName[3] == "P" )
         {
+            graf_year_Year = imgName[2].toInt();
 
             for (int i=0; i<  ARRAY_SIZE(graf_year_P) ;++i) {
                 graf_year_P[i] = imgName[i+4].toInt();
@@ -580,6 +676,7 @@ void Bluetooth::parsingFile(QString line , int index)
     case 2:{
         if (imgName[0] == "s" && imgName[1] == "GM" && imgName[3] == "P" )
         {
+            graf_month_Month = imgName[2].toInt();
             for (int i=0; i<  ARRAY_SIZE(graf_month_P);++i) {
                 graf_month_P[i] = imgName[i+4].toInt();
             }
@@ -598,6 +695,7 @@ void Bluetooth::parsingFile(QString line , int index)
     case 4:{
         if (imgName[0] == "s" && imgName[1] == "GD" && imgName[3] == "P" )
         {
+            graf_day_Day = imgName[2].toInt();
             for (int i=0; i<  ARRAY_SIZE(graf_day_P);++i) {
                 graf_day_P[i] = imgName[i+4].toInt();
             }

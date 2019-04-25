@@ -2,6 +2,8 @@ import QtQuick 2.9
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Material 2.12
 import QtCharts 2.3
+import QtQuick.Layouts 1.3
+
 
 Item{
  id: home_page
@@ -18,8 +20,39 @@ Item{
 
          topMargin: 20
          bottomMargin: 20
-         contentHeight: home_page_column.height + title.height + ledConnected.height + textPrice.height
+         contentHeight: home_page_column.height + title.height + textPrice.height
 
+         StackLayout {
+
+              width:home_page_f.width
+              height:home_page_f.height
+              id: home_layout
+              //currentIndex:0
+              currentIndex:(bluetooth.password && bluetooth.ledConnec)?1:0;
+
+              GridLayout{
+                  columns:3
+
+                  ColumnLayout{
+                  }
+                  ColumnLayout{
+                      id:home_column
+                      Label {
+                          Layout.preferredHeight: home_page_f.height/3
+                      }
+                      Label{
+                          id : home_page_status
+                          font.pixelSize: 12
+                          text:bluetooth.ledConnec?"Palavra-passe Errada":"Medidor não esta conectado!"
+                          Layout.preferredHeight: home_page_f.height/5
+                          Layout.alignment: Qt.AlignCenter
+
+                      }
+                  }
+                  ColumnLayout{
+                  }
+              }
+            }
              Label {
                  id: title
                  font.pixelSize: 22
@@ -33,6 +66,7 @@ Item{
              }
 
              Label {
+                 visible:(home_layout.currentIndex==1)?true:false
                  id : textPrice
                  anchors.topMargin: 20
                  anchors.top: title.bottom
@@ -43,20 +77,9 @@ Item{
                  text: bluetooth.paymentText
             }
 
-             Image{
-
-                 id: ledConnected
-                 width: 40
-                 height: 40
-                 source: bluetooth.ledConnec ? "Imagens/led_on.png" :
-                                    "Imagens/led_off.png"
-
-                 anchors.top: parent.top
-                 anchors.right :parent.right
-
-             }
 
              Column {
+                 visible:(home_layout.currentIndex==1)?true:false
                  id: home_page_column
                  spacing: 20
                  anchors.margins: 20
