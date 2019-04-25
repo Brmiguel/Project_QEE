@@ -16,20 +16,20 @@ struct Date{
 
 struct Graf_year_t{
     int year;
-    int type;//Q ou P
+    int type;//P-0 ou Q-1
     int actual_month;
     int data[2];
 }typedef graf_year_t;
 
 struct Graf_month_t{
     int month;
-    int type;//Q ou P
+    int type;//P-0 ou Q-1
     int data[31];
 }typedef graf_month_t;
 
 struct Graf_day_t{
     int day;
-    int type;//Q ou P
+    int type;//P-0 ou Q-1
     int data[24];
 }typedef graf_day_t;
 
@@ -72,8 +72,8 @@ public:
    QString Get_Content(QString mensage);//verifica se têm o s: no inicio e o :P no fim, retorna a mensagem sem o S: e sem o :P
    int Get_Type(QString content);// verfica o tipo da mensagem, retorna o tipo da mensagem(se é para o grafico do ano, se é para a palavra-passe, etc)
    graf_year_t Graf_Year_Data(QString content);//tipo 0
-   graf_month_t Graf_Year_Month(QString content);//tipo 1
-   graf_day_t Graf_Year_Day(QString content);//tipo 2
+   graf_month_t Graf_Month_Data(QString content);//tipo 1
+   graf_day_t Graf_Day_Data(QString content);//tipo 2
    Graf_fault_last_t Graf_fault_last(QString content);//tipo 3
    Graf_fault_counter_t Graf_fault_counter(QString content);//tipo 4
    Graf_rt_t Graf_rt(QString content);//tipo 5

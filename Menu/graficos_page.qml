@@ -79,8 +79,10 @@ Item{
                  axisY: BarCategoryAxis { labelsFont:(ano_g.height<400)?Qt.font({pointSize: 6}):Qt.font({pointSize: 8}) ;categories: ["1/"+bluetooth.graf_year, "2/"+bluetooth.graf_year,"3/"+bluetooth.graf_year, "4/"+bluetooth.graf_year,"5/"+bluetooth.graf_year, "6/"+bluetooth.graf_year,"7/"+bluetooth.graf_year,"8/"+bluetooth.graf_year, "9/"+bluetooth.graf_year ,"10/"+bluetooth.graf_year,"11/"+bluetooth.graf_year, "12/"+bluetooth.graf_year] }
                  axisX: ValueAxis {
                                  min: 0
-                                 max:bluetooth.graf_year_Scale
-                                 tickInterval : (bluetooth.graf_year_Scale/14)-(bluetooth.graf_year_Scale/14)%10
+                                 max:700
+                                 tickInterval :50
+                                 //max:bluetooth.graf_year_Scale
+                                 //tickInterval : (bluetooth.graf_year_Scale/14)-(bluetooth.graf_year_Scale/14)%10
                                  tickType:ValueAxis.TicksDynamic
                                  labelFormat: "%.0f"
                                  labelsFont:(ano_g.width<500)?Qt.font({pointSize: 6}):Qt.font({pointSize: 8})
@@ -105,7 +107,7 @@ Item{
                  axisY: BarCategoryAxis { labelsFont:(month_g.width<440)?Qt.font({pointSize: 5}):Qt.font({pointSize: 7}) ;categories: bluetooth.graf_month_D }
                  axisX: ValueAxis {
                                  min: 0
-                                 max:bluetooth.graf_month_Scale
+                                 max:30
                                  tickInterval :5
                                  tickType:ValueAxis.TicksDynamic
                                  labelFormat: "%.0f"
@@ -131,7 +133,8 @@ Item{
                  axisY: BarCategoryAxis { labelsFont:(day_g.width<440)?Qt.font({pointSize: 5}):Qt.font({pointSize: 7}) ;categories:["0h","1h","2h","3h","4h","5h","6h","7h","8h","9h","10h","11h","12h","13h","14h","15h","16h","17h","18h","19h","20h","21h","22h","23h"]}
                  axisX: ValueAxis {
                                  min: 0
-                                 max:bluetooth.graf_day_Scale
+                                 //max:bluetooth.graf_day_Scale
+                                 max:30
                                  tickInterval:2
                                  tickType:ValueAxis.TicksDynamic
                                  labelFormat: "%.0f"

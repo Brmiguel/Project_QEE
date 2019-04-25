@@ -381,6 +381,129 @@ double Bluetooth::get_Rt_I(int index)
     return graf_rt_I[index];
 }
 
+void Bluetooth::updateGrafYear(Graf_year_t struct_recieve)
+{
+    qDebug()<<"graf_ano ano:"<<struct_recieve.year<<" "<<struct_recieve.actual_month<<" "<<struct_recieve.type<<" "<<struct_recieve.data[0]<<","<<struct_recieve.data[1];
+
+    if( graf_year_Year != struct_recieve.year){//se o ano mudar limpar o ano anterior
+        qDebug()<<"ano novo vai limpar";
+        graf_year_Year = struct_recieve.year;
+        for (int i=0;i<12;i++) {
+            graf_year_P[i]=0;
+            graf_year_Q[i]=0;
+        }
+        emit GYChanged();
+    }
+
+    int i= struct_recieve.actual_month-1;
+
+    if(struct_recieve.type==0){
+        for (int x=0;x<2;x++) {
+           if(struct_recieve.data[x]!=0 && (i-x-1)>=0){
+              qDebug()<<"vai escrever"<<struct_recieve.data[x]<<" no mes:"<<i-x-1;
+              graf_year_P[i-x-1]=struct_recieve.data[x];
+           }
+           else {
+               qDebug()<<"nao vai escrever";
+           }
+        }
+    }
+
+    if(struct_recieve.type==1){
+        for (int x=0;x<2;x++) {
+           if(struct_recieve.data[x]!=0 && (i-x-1)>=0)
+              graf_year_Q[i-x-1]=struct_recieve.data[x];
+        }
+    }
+
+    emit pGYChanged();
+    emit qGYChanged();
+
+};
+
+void Bluetooth::updateGrafMonth(Graf_month_t struct_recieve){
+
+    if( graf_month_Month != struct_recieve.month){//se o ano mudar limpar o ano anterior
+        graf_month_Month = struct_recieve.month;
+        graf_fault_Sag=0;
+        graf_fault_Swell=0;
+
+        for (int i=0;i<31;i++) {
+            graf_month_P[i]=0;
+            graf_month_Q[i]=0;
+        }
+    }
+
+
+    if(struct_recieve.type==0){
+        for (int x=0;x<31;x++) {
+           if(struct_recieve.data[x]!=0)
+              graf_month_P[x]=struct_recieve.data[x];
+        }
+    }
+    else {
+        for (int x=0;x<31;x++) {
+           if(struct_recieve.data[x]!=0)
+              graf_month_Q[x]=struct_recieve.data[x];
+        }
+    }
+
+    emit GMChanged();
+    emit pGMChanged();
+    emit qGMChanged();
+};
+
+void Bluetooth::updateGrafDay(Graf_day_t struct_recieve){
+
+    if( graf_day_Day != struct_recieve.day){//se o ano mudar limpar o ano anterior
+        graf_day_Day = struct_recieve.day;
+        for (int i=0;i<24;i++) {
+            graf_day_P[i]=0;
+            graf_day_Q[i]=0;
+        }
+    }
+
+
+    if(struct_recieve.type==0){
+        for (int x=0;x<24;x++) {
+           if(struct_recieve.data[x]!=0)
+              graf_day_P[x]=struct_recieve.data[x];
+        }
+    }
+    else {
+        for (int x=0;x<24;x++) {
+           if(struct_recieve.data[x]!=0)
+              graf_day_Q[x]=struct_recieve.data[x];
+        }
+    }
+
+    emit GDChanged();
+    emit pGDChanged();
+    emit qGDChanged();
+};
+
+void Bluetooth::updateGrafFaultLast(Graf_fault_last_t struct_recieve){
+
+    graf_fault_Time= QString::number(struct_recieve.date.month)+"/"+QString::number(struct_recieve.date.day)+" "+QString::number(struct_recieve.date.hour)+":"+QString::number(struct_recieve.date.minute)+":"+QString::number(struct_recieve.date.sec);
+
+    for (int x=0;x<108;x++) {
+           graf_fault_V[x]=struct_recieve.data[x];
+    }
+
+    emit GFLChanged();
+    emit timeGFChanged();
+    emit vGFChanged();
+};
+
+void Bluetooth::updateGrafFaultCounter(Graf_fault_counter_t struct_recieve){
+
+    graf_fault_Sag+=struct_recieve.sag;
+    graf_fault_Swell+=struct_recieve.swell;
+
+    emit sagGFChanged();
+    emit swellGFChanged();
+};
+
 void Bluetooth::readData()
 {
     QByteArray recieved =  socket->readAll();
@@ -393,18 +516,23 @@ void Bluetooth::readData()
     switch (recieve.Get_Type(content)) {
     case 0:
 
+        updateGrafYear(recieve.Graf_Year_Data(content));
         break;
     case 1:
 
+        updateGrafMonth(recieve.Graf_Month_Data(content));
         break;
     case 2:
 
+        updateGrafDay(recieve.Graf_Day_Data(content));
         break;
     case 3:
 
+        updateGrafFaultLast(recieve.Graf_fault_last(content));
         break;
     case 4:
 
+        updateGrafFaultCounter(recieve.Graf_fault_counter(content));
         break;
     case 5:{
         Graf_rt_t struct_recieve = recieve.Graf_rt(content);
@@ -463,7 +591,7 @@ int Bluetooth::grafYearS()
     }
     ret=max+(100-(max%100));
 
-    qDebug()<<"-year "<<ret<<" "<<max;
+    //qDebug()<<"-year "<<ret<<" "<<max;
     return ret;
 }
 
@@ -504,7 +632,7 @@ int Bluetooth::grafMonthS()
         }
     }
     int ret= max+(10-(max%10));
-    qDebug()<<"-month "<<ret<<" "<<max;
+    //qDebug()<<"-month "<<ret<<" "<<max;
     return ret;
 }
 
@@ -591,7 +719,7 @@ int Bluetooth::grafDayS()
         }
     }
     int ret= max+(10-(max%10));
-    qDebug()<<"-day "<<ret<<" "<<max;
+    //qDebug()<<"-day "<<ret<<" "<<max;
     return ret;
 }
 

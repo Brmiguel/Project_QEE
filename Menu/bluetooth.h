@@ -200,6 +200,11 @@ private slots:
 
 private:
 
+    void updateGrafYear(Graf_year_t struct_recieve);
+    void updateGrafMonth(Graf_month_t struct_recieve);
+    void updateGrafDay(Graf_day_t struct_recieve);
+    void updateGrafFaultLast(Graf_fault_last_t struct_recieve);
+    void updateGrafFaultCounter(Graf_fault_counter_t struct_recieve);
 
     int index_devices=0;
     int indexRTP=25;

@@ -76,6 +76,100 @@ int Recieve::Get_Type(QString content){
     }
 }
 
+Graf_year_t Recieve::Graf_Year_Data(QString content)
+{
+    QStringList imgName = content.split(";");
+    Graf_year_t struct_recieve;
+    struct_recieve.year=imgName[1].toInt();
+    if(imgName[2]=="P"){
+       struct_recieve.type=0;
+    }
+    else {
+       struct_recieve.type=1;
+    }
+    imgName=imgName[3].split(":");
+    struct_recieve.actual_month=imgName[0].toInt();
+    imgName=imgName[1].split(",");
+    qDebug()<<"parsing "<<imgName[0]<<" "<<imgName[1];
+    struct_recieve.data[0]=imgName[0].toInt();
+    struct_recieve.data[1]=imgName[1].toInt();
+
+    return struct_recieve;
+};
+
+Graf_month_t Recieve::Graf_Month_Data(QString content)
+{
+    QStringList imgName = content.split(";");
+    Graf_month_t struct_recieve;
+    struct_recieve.month=imgName[1].toInt();
+    if(imgName[2]=="P"){
+       struct_recieve.type=0;
+    }
+    else {
+       struct_recieve.type=1;
+    }
+
+    imgName=imgName[3].split(",");
+
+    for (int i=0;i<imgName.size();i++) {
+         struct_recieve.data[i]=imgName[i].toInt();
+         qDebug()<<"parsing "<<imgName[i];
+    }
+
+    return struct_recieve;
+};
+
+Graf_day_t Recieve::Graf_Day_Data(QString content)
+{
+    QStringList imgName = content.split(";");
+    Graf_day_t struct_recieve;
+    struct_recieve.day=imgName[1].toInt();
+    if(imgName[2]=="P"){
+       struct_recieve.type=0;
+    }
+    else {
+       struct_recieve.type=1;
+    }
+
+    imgName=imgName[3].split(",");
+
+    for (int i=0;i<24;i++) {
+         struct_recieve.data[i]=imgName[i].toInt();
+         qDebug()<<"parsing "<<imgName[i];
+
+    }
+
+    return struct_recieve;
+};
+
+Graf_fault_last_t Recieve::Graf_fault_last(QString content){
+    QStringList imgName = content.split(":");
+    imgName=imgName[1].split(",");
+    Graf_fault_last_t struct_recieve;
+    struct_recieve.date.month =imgName[0].toInt();
+    struct_recieve.date.day =imgName[1].toInt();
+    struct_recieve.date.hour =imgName[2].toInt();
+    struct_recieve.date.minute =imgName[3].toInt();
+    struct_recieve.date.sec =imgName[4].toInt();
+
+    for (int i=0;i<108;i++) {
+         struct_recieve.data[i]=imgName[i+5].toInt();
+    }
+
+    return struct_recieve;
+
+};
+
+Graf_fault_counter_t Recieve::Graf_fault_counter(QString content){
+    QStringList imgName = content.split(";");
+    Graf_fault_counter_t struct_recieve;
+
+    struct_recieve.sag=imgName[0].remove(0,4).toInt();
+    struct_recieve.swell=imgName[1].remove(0,6).toInt();
+
+    return struct_recieve;
+};
+
 Graf_rt_t Recieve::Graf_rt(QString content)
 {
     QStringList imgName = content.split(";");
