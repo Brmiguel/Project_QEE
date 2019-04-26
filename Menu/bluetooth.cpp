@@ -3,7 +3,6 @@
 
 
 
-
 Bluetooth::Bluetooth(QObject *parent)
     : QObject(parent)
 {
@@ -37,6 +36,29 @@ Bluetooth::Bluetooth(QObject *parent)
     p_P=600;
     p_Q=300;
 
+
+    for (int i=0; i <24; ++i) {
+        graf_day_P[i]=0;
+        graf_day_Q[i]=0;
+    }
+
+    for (int i=0;i <31;++i) {
+        graf_month_P[i]=0;
+        graf_month_Q[i]=0;
+    }
+
+    for (int i=0; i <12;++i) {
+        graf_year_P[i]=0;
+        graf_year_Q[i]=0;
+    }
+
+    custoLuz = 5;
+
+    //graf_year_Q[1]=500;
+
+    //writeFile();
+
+    graf_year_Q[1]=0;
 
     graf_rt_P[0]=0;
     graf_rt_P[1]=0;
@@ -119,10 +141,9 @@ Bluetooth::Bluetooth(QObject *parent)
 
 
 
-    custoLuz = 5;
 
     password_r=false;
-    //writeFile();
+
     readFile();
 }
 
@@ -148,6 +169,7 @@ void Bluetooth::password_correct(QString password_correct)
 {
     if(password_correct == password_w){
         password_r=true;
+        send("",5,true);
     }
     else {
         password_r=false;
@@ -233,7 +255,6 @@ void Bluetooth::connectedChanged()
 QString Bluetooth::btnNameRet()
 {
     if(socket->state() == QBluetoothSocket::ConnectingState ){  // state connected
-
         btnName = "Connecting ...";
     }
     if(socket->state() == QBluetoothSocket::ConnectedState ){  // state connected
@@ -324,6 +345,18 @@ void Bluetooth::conectar(QString name)
     emit btnChanged();
 }
 
+
+void Bluetooth::pagina_Atual(QString page_id){
+
+    if(page_id=="home_page.qml"){
+        send("",3,true);
+    }
+    else {
+        send("",3,false);
+    }
+
+};
+
 void Bluetooth::send(QString mensage,int tipo,bool enable)
 {
     QByteArray text;
@@ -356,7 +389,10 @@ void Bluetooth::send(QString mensage,int tipo,bool enable)
         qDebug()<<"-"<<date.year<<","<<date.month<<","<<date.day<<","<<date.hour<<","<<date.minute<<","<<date.sec;
         qDebug()<<text;
         break;
-
+     case 5:
+        mensage="s:PS:S:P";
+        text= mensage.toUtf8();
+        break;
     default:
         text = mensage.toUtf8();
     }
@@ -858,7 +894,10 @@ void Bluetooth::parsingFile(QString line , int index)
 
 bool Bluetooth::readFile()
 {
+
     QFile file("Dados.txt");
+
+
     if(!file.exists())
     {
         qDebug() << file.fileName() << " does not exists";
@@ -893,7 +932,9 @@ bool Bluetooth::readFile()
 
 bool Bluetooth::writeFile()
 {
+
     QFile file("Dados.txt");
+
 
 
     if(!file.exists())

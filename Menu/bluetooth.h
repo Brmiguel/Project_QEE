@@ -8,6 +8,7 @@
 #include <QListWidgetItem>
 #include <QBluetoothSocket>
 #include <QBluetoothLocalDevice>
+#include <QStandardPaths>
 
 #include <QStringListModel>
 #include <QObject>
@@ -75,6 +76,7 @@ class Bluetooth : public QObject
 
 public:
 
+     QString mDataPath ;
 
     explicit Bluetooth(QObject *parent = nullptr);
 
@@ -131,6 +133,7 @@ public:
      int grafFaultSwell();
 
      void parsingFile(QString line , int index);
+    Q_INVOKABLE void pagina_Atual(QString page_id);
 
     Q_INVOKABLE void mudar_preco(double custoLuz);
 

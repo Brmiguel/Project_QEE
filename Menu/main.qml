@@ -128,7 +128,8 @@ ApplicationWindow {
                     icon.source: source
                     icon.color: color
                     onClicked: {
-
+                        if(bluetooth.password && bluetooth.ledConnec)
+                            bluetooth.pagina_Atual(qsTr(pagina_id));
                         stack.push( qsTr(pagina_id))
                     }
                 }
