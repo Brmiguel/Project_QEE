@@ -40,7 +40,7 @@ Item{
             font.pixelSize: 22
             elide: Label.ElideRight
             horizontalAlignment: Qt.AlignHCenter
-            text: qsTr("Pagina de Configuração")
+            text: qsTr("Pagina de Conexão")
         }
 
         ListView {

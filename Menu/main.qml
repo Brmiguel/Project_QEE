@@ -9,7 +9,7 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("FUCK QEE")
+    title: qsTr("QEE")
 
     Bluetooth{
 
